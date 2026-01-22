@@ -3,14 +3,29 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Code, Database, Cpu } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Hero() {
+  const [nodes, setNodes] = useState<any[]>([]);
+
+  useEffect(() => {
+    const newNodes = [...Array(5)].map(() => ({
+      width: Math.random() * 100 + 50,
+      height: Math.random() * 100 + 50,
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      duration: Math.random() * 5 + 5,
+    }));
+    setNodes(newNodes);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-midnight-navy">
       {/* Background Circuit Pattern (Simplified CSS/SVG) */}
       <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         <svg
-          className="w-full h-full"
+          className="w-full h-full animate-[pulse_4s_ease-in-out_infinite]"
           width="100%"
           height="100%"
           xmlns="http://www.w3.org/2000/svg"
@@ -36,15 +51,15 @@ export default function Hero() {
 
       {/* Floating Nodes Animation */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(5)].map((_, i) => (
+        {nodes.map((node, i) => (
           <motion.div
             key={i}
             className="absolute bg-electric-cyan rounded-full opacity-20"
             style={{
-              width: Math.random() * 100 + 50,
-              height: Math.random() * 100 + 50,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
+              width: node.width,
+              height: node.height,
+              top: node.top,
+              left: node.left,
               filter: "blur(40px)",
             }}
             animate={{
@@ -52,7 +67,7 @@ export default function Hero() {
               opacity: [0.1, 0.3, 0.1],
             }}
             transition={{
-              duration: Math.random() * 5 + 5,
+              duration: node.duration,
               repeat: Infinity,
               ease: "easeInOut",
             }}
