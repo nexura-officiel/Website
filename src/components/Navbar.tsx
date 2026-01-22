@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t, language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,10 +21,10 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Services", href: "#services" },
-    { name: "Vision", href: "#vision" },
-    { name: "Process", href: "#process" },
-    { name: "Contact", href: "#contact" },
+    { name: t.nav.services, href: "#services" },
+    { name: t.nav.vision, href: "#vision" },
+    { name: t.nav.process, href: "#process" },
+    { name: t.nav.contact, href: "#contact" },
   ];
 
   return (
@@ -52,8 +54,8 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+          <div className="hidden md:flex items-center gap-8">
+            <div className="flex items-baseline space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -65,17 +67,35 @@ export default function Navbar() {
                   <span className="text-electric-cyan ml-1">/&gt;</span>
                 </Link>
               ))}
-              <Link
-                href="#contact"
-                className="font-sans font-semibold px-6 py-2 border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-midnight-navy transition-all duration-300 rounded-sm"
-              >
-                START PROJECT
-              </Link>
             </div>
+
+            {/* Language Switcher */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 font-mono text-xs text-slate-400 hover:text-white border border-white/10 px-3 py-1 rounded bg-white/5 transition-colors"
+            >
+              <Globe size={14} />
+              <span>{language === "fr" ? "FR" : "EN"}</span>
+            </button>
+
+            <Link
+              href="#contact"
+              className="font-sans font-semibold px-6 py-2 border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-midnight-navy transition-all duration-300 rounded-sm"
+            >
+              {t.nav.startProject}
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-4">
+             {/* Mobile Language Switcher */}
+             <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 font-mono text-xs text-slate-400 hover:text-white border border-white/10 px-3 py-1 rounded bg-white/5 transition-colors"
+            >
+              <span>{language === "fr" ? "FR" : "EN"}</span>
+            </button>
+
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-slate-300 hover:text-white p-2"

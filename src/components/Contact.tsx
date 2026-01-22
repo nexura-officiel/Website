@@ -3,10 +3,12 @@
 import { motion } from "framer-motion";
 import { Send, CheckCircle, Mail, MapPin, Clock, Terminal } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,18 +36,18 @@ export default function Contact() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-electric-cyan opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-electric-cyan"></span>
                 </span>
-                SYSTEM STATUS: ONLINE
+                {t.contact.status}
               </div>
               
               <h2 className="text-4xl md:text-5xl font-sans font-bold text-white mb-6">
-                Initialize <br />
+                {t.contact.title} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan to-blue-500">
-                  Connection
+                  {t.contact.highlight}
                 </span>
               </h2>
               
               <p className="text-slate-400 text-lg mb-12 leading-relaxed">
-                Ready to engineer your future? Our architects are standing by to analyze your requirements and propose a scalable solution.
+                {t.contact.description}
               </p>
 
               <div className="space-y-8">
@@ -54,7 +56,7 @@ export default function Contact() {
                     <Mail size={24} />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold mb-1">Communication Channel</h4>
+                    <h4 className="text-white font-bold mb-1">{t.contact.info.emailLabel}</h4>
                     <a href="mailto:contact@nexura.com" className="text-slate-400 hover:text-electric-cyan transition-colors font-mono">
                       contact@nexura.com
                     </a>
@@ -66,10 +68,10 @@ export default function Contact() {
                     <MapPin size={24} />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold mb-1">Base of Operations</h4>
+                    <h4 className="text-white font-bold mb-1">{t.contact.info.locationLabel}</h4>
                     <p className="text-slate-400">
-                      Casablanca, Morocco<br />
-                      <span className="text-xs text-slate-500">Global Remote Capabilities</span>
+                      {t.contact.info.location}<br />
+                      <span className="text-xs text-slate-500">{t.contact.info.remote}</span>
                     </p>
                   </div>
                 </div>
@@ -79,9 +81,9 @@ export default function Contact() {
                     <Clock size={24} />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold mb-1">Response Time</h4>
+                    <h4 className="text-white font-bold mb-1">{t.contact.info.timeLabel}</h4>
                     <p className="text-slate-400">
-                      Typically within 24 hours
+                      {t.contact.info.time}
                     </p>
                   </div>
                 </div>
@@ -128,15 +130,15 @@ export default function Contact() {
                     >
                       <CheckCircle className="text-electric-cyan w-20 h-20 mb-6" />
                     </motion.div>
-                    <h3 className="text-2xl text-white font-bold mb-2">Transmission Received</h3>
+                    <h3 className="text-2xl text-white font-bold mb-2">{t.contact.form.successTitle}</h3>
                     <p className="text-slate-400 max-w-xs mx-auto mb-8">
-                      Your project coordinates have been logged. Stand by for engineer contact.
+                      {t.contact.form.successMsg}
                     </p>
                     <button 
                       onClick={() => setSubmitted(false)}
                       className="text-sm font-mono text-electric-cyan hover:underline"
                     >
-                      Send new transmission_
+                      {t.contact.form.reset}
                     </button>
                   </div>
                 ) : (
@@ -144,7 +146,7 @@ export default function Contact() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="relative">
                         <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === 'name' ? 'text-electric-cyan' : 'text-slate-500'}`}>
-                           // ENTER_NAME
+                           {t.contact.form.nameLabel}
                         </label>
                         <input
                           type="text"
@@ -152,12 +154,12 @@ export default function Contact() {
                           onFocus={() => setFocusedField('name')}
                           onBlur={() => setFocusedField(null)}
                           className="w-full bg-[#050C16] border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-electric-cyan/50 focus:ring-1 focus:ring-electric-cyan/50 transition-all placeholder:text-slate-700"
-                          placeholder="John Doe"
+                          placeholder={t.contact.form.placeholders.name}
                         />
                       </div>
                       <div>
                         <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === 'email' ? 'text-electric-cyan' : 'text-slate-500'}`}>
-                           // ENTER_EMAIL
+                           {t.contact.form.emailLabel}
                         </label>
                         <input
                           type="email"
@@ -165,30 +167,29 @@ export default function Contact() {
                           onFocus={() => setFocusedField('email')}
                           onBlur={() => setFocusedField(null)}
                           className="w-full bg-[#050C16] border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-electric-cyan/50 focus:ring-1 focus:ring-electric-cyan/50 transition-all placeholder:text-slate-700"
-                          placeholder="name@company.com"
+                          placeholder={t.contact.form.placeholders.email}
                         />
                       </div>
                     </div>
 
                     <div>
                       <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === 'type' ? 'text-electric-cyan' : 'text-slate-500'}`}>
-                         // SELECT_PROTOCOL
+                         {t.contact.form.typeLabel}
                       </label>
                       <select
                         onFocus={() => setFocusedField('type')}
                         onBlur={() => setFocusedField(null)}
                         className="w-full bg-[#050C16] border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-electric-cyan/50 focus:ring-1 focus:ring-electric-cyan/50 transition-all [&>option]:bg-midnight-navy"
                       >
-                        <option>Software Development</option>
-                        <option>AI & Automation</option>
-                        <option>Cloud Infrastructure</option>
-                        <option>Consulting / Audit</option>
+                        {t.contact.form.types.map((type, i) => (
+                          <option key={i}>{type}</option>
+                        ))}
                       </select>
                     </div>
 
                     <div>
                       <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === 'message' ? 'text-electric-cyan' : 'text-slate-500'}`}>
-                         // INPUT_DATA
+                         {t.contact.form.msgLabel}
                       </label>
                       <textarea
                         rows={4}
@@ -196,7 +197,7 @@ export default function Contact() {
                         onFocus={() => setFocusedField('message')}
                         onBlur={() => setFocusedField(null)}
                         className="w-full bg-[#050C16] border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-electric-cyan/50 focus:ring-1 focus:ring-electric-cyan/50 transition-all resize-none placeholder:text-slate-700"
-                        placeholder="Describe your objectives..."
+                        placeholder={t.contact.form.placeholders.msg}
                       ></textarea>
                     </div>
 
@@ -205,7 +206,7 @@ export default function Contact() {
                       className="w-full bg-electric-cyan text-midnight-navy font-bold py-4 rounded hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2 group relative overflow-hidden"
                     >
                       <span className="relative z-10 flex items-center gap-2">
-                        INITIATE TRANSMISSION <Send size={18} className="group-hover:translate-x-1 transition-transform" />
+                        {t.contact.form.btn} <Send size={18} className="group-hover:translate-x-1 transition-transform" />
                       </span>
                     </button>
                   </form>

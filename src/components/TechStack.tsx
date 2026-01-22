@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion";
 import { Cpu, Layers, Box, Terminal, Database, Cloud, Code, Shield, Smartphone, Server, Zap } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
+// Enhanced data structure with icons and categories
 const technologies = [
   { name: "React", category: "Frontend", icon: Box },
   { name: "Next.js", category: "Framework", icon: Layers },
@@ -40,6 +42,8 @@ const TechCard = ({ tech }: { tech: typeof technologies[0] }) => (
 );
 
 export default function TechStack() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative py-24 bg-[#030B16] border-y border-white/5 z-20">
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.05] pointer-events-none"></div>
@@ -52,18 +56,19 @@ export default function TechStack() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-electric-cyan"></span>
           </div>
           <span className="text-[10px] font-mono text-electric-cyan font-bold tracking-[0.2em] uppercase">
-            System_Modules
+            {t.techStack.label}
           </span>
         </div>
       </div>
 
-      <div className="relative">
-        {/* Row 1: Forward */}
-        <div className="flex overflow-hidden mb-8">
-            {/* Gradient Masks */}
-            <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-gradient-to-r from-[#030B16] to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-gradient-to-l from-[#030B16] to-transparent z-10 pointer-events-none"></div>
-            
+      <div className="relative overflow-hidden">
+        {/* Gradient Masks */}
+        <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-gradient-to-r from-[#030B16] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-gradient-to-l from-[#030B16] to-transparent z-10 pointer-events-none"></div>
+
+        <div className="flex flex-col gap-8">
+          {/* Row 1: Forward */}
+          <div className="flex">
             <motion.div
               className="flex"
               animate={{ x: ["0%", "-50%"] }}
@@ -77,14 +82,10 @@ export default function TechStack() {
                 <TechCard key={`r1-${index}`} tech={tech} />
               ))}
             </motion.div>
-        </div>
+          </div>
 
-        {/* Row 2: Reverse */}
-        <div className="flex overflow-hidden">
-            {/* Gradient Masks */}
-            <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-gradient-to-r from-[#030B16] to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-gradient-to-l from-[#030B16] to-transparent z-10 pointer-events-none"></div>
-
+          {/* Row 2: Reverse */}
+          <div className="flex">
             <motion.div
               className="flex"
               animate={{ x: ["-50%", "0%"] }}
@@ -98,6 +99,7 @@ export default function TechStack() {
                 <TechCard key={`r2-${index}`} tech={tech} />
               ))}
             </motion.div>
+          </div>
         </div>
       </div>
     </section>

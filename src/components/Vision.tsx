@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Vision() {
+  const { t } = useLanguage();
+
   return (
     <section id="vision" className="py-24 bg-[#08182B] relative overflow-hidden">
         {/* Background Decorative Elements */}
@@ -18,20 +21,15 @@ export default function Vision() {
              viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-sans font-bold text-white mb-6">
-              More Than Just Code.<br />
-              <span className="text-electric-cyan">Strategic Engineering.</span>
+              {t.vision.title}<br />
+              <span className="text-electric-cyan">{t.vision.highlight}</span>
             </h2>
             <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-              Nexura is an Agency-Architect. We bring the rigor of state-certified engineering to the agility of the digital world. We don't just build software; we design scalable systems that drive business value.
+              {t.vision.description}
             </p>
 
             <ul className="space-y-4">
-              {[
-                "Architectural Precision & Scalability",
-                "Business-First ROI Focus",
-                "Agile Execution with Premium Quality Control",
-                "Advanced AI Integration Capabilities"
-              ].map((item, i) => (
+              {t.vision.points.map((item, i) => (
                 <li key={i} className="flex items-center gap-3 text-slate-300">
                   <CheckCircle2 className="text-electric-cyan shrink-0" size={20} />
                   <span>{item}</span>

@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Linkedin, Mail, Github } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-midnight-navy border-t border-white/10 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,7 +27,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-slate-400 max-w-sm mb-6">
-              Engineering the future of digital business. We build the systems that power your growth.
+              {t.footer.tagline}
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-slate-400 hover:text-electric-cyan transition-colors">
@@ -38,28 +43,28 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6">Services</h4>
+            <h4 className="text-white font-bold mb-6">{t.footer.headers.services}</h4>
             <ul className="space-y-3 text-slate-400">
-              <li><Link href="#" className="hover:text-electric-cyan transition-colors">Web Development</Link></li>
-              <li><Link href="#" className="hover:text-electric-cyan transition-colors">Mobile Apps</Link></li>
-              <li><Link href="#" className="hover:text-electric-cyan transition-colors">AI Solutions</Link></li>
-              <li><Link href="#" className="hover:text-electric-cyan transition-colors">Cloud Architecture</Link></li>
+              <li><Link href="#" className="hover:text-electric-cyan transition-colors">{t.footer.links.web}</Link></li>
+              <li><Link href="#" className="hover:text-electric-cyan transition-colors">{t.footer.links.mobile}</Link></li>
+              <li><Link href="#" className="hover:text-electric-cyan transition-colors">{t.footer.links.ai}</Link></li>
+              <li><Link href="#" className="hover:text-electric-cyan transition-colors">{t.footer.links.cloud}</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6">Legal</h4>
+            <h4 className="text-white font-bold mb-6">{t.footer.headers.legal}</h4>
             <ul className="space-y-3 text-slate-400">
-              <li><Link href="#" className="hover:text-electric-cyan transition-colors">Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:text-electric-cyan transition-colors">Terms of Service</Link></li>
+              <li><Link href="#" className="hover:text-electric-cyan transition-colors">{t.footer.links.privacy}</Link></li>
+              <li><Link href="#" className="hover:text-electric-cyan transition-colors">{t.footer.links.terms}</Link></li>
             </ul>
           </div>
 
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
-          <p>&copy; {new Date().getFullYear()} Nexura. All rights reserved.</p>
-          <p className="mt-2 md:mt-0 font-mono">Designed & Built by Nexura Engineering</p>
+          <p>&copy; {new Date().getFullYear()} Nexura. {t.footer.rights}</p>
+          <p className="mt-2 md:mt-0 font-mono">{t.footer.builtBy}</p>
         </div>
       </div>
     </footer>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -27,7 +28,9 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${jetbrainsMono.variable} antialiased bg-midnight-navy text-pure-white`}
       >
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

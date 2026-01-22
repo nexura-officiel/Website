@@ -2,32 +2,18 @@
 
 import { motion } from "framer-motion";
 import { Quote, TrendingUp, Clock, Shield } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
-const testimonials = [
-  {
-    quote: "Nexura's architecture turned our legacy system into a high-speed engine. The automation workflows alone saved us 20 hours a week per employee.",
-    author: "Karim B.",
-    role: "COO, Logistics Chain",
-    metric: "+40% Efficiency",
-    icon: Clock,
-  },
-  {
-    quote: "We needed an MVP in 8 weeks. Nexura delivered a scalable product in 6, with code quality that passed our Series A due diligence audit flawlessly.",
-    author: "Sarah L.",
-    role: "Founder, FinTech Startup",
-    metric: "Seed Funding Secured",
-    icon: TrendingUp,
-  },
-  {
-    quote: "Their AI integration didn't just answer questions; it analyzed our data to predict market trends. Truly engineering-grade intelligence.",
-    author: "Marc D.",
-    role: "CTO, Retail Group",
-    metric: "99.9% Accuracy",
-    icon: Shield,
-  },
-];
+const icons = [Clock, TrendingUp, Shield];
 
 export default function Testimonials() {
+  const { t } = useLanguage();
+
+  const testimonials = t.testimonials.items.map((item, index) => ({
+    ...item,
+    icon: icons[index]
+  }));
+
   return (
     <section className="py-24 bg-midnight-navy relative overflow-hidden">
       {/* Background Map / Network Pattern */}
@@ -47,16 +33,16 @@ export default function Testimonials() {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div>
             <h2 className="text-3xl md:text-4xl font-sans font-bold text-white mb-2">
-              Impact & Validation
+              {t.testimonials.title}
             </h2>
             <div className="h-1 w-20 bg-electric-cyan rounded-full mb-4"></div>
             <p className="text-slate-400 max-w-xl">
-              Real results from partners who trust our engineering precision.
+              {t.testimonials.subtitle}
             </p>
           </div>
           <div className="hidden md:block">
             <span className="text-electric-cyan font-mono text-sm border border-electric-cyan/30 px-4 py-2 rounded-full bg-electric-cyan/5">
-              Client Satisfaction: 100%
+              {t.testimonials.satisfaction}
             </span>
           </div>
         </div>
@@ -88,10 +74,10 @@ export default function Testimonials() {
 
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-white font-bold text-sm">
-                  {item.author.charAt(0)}
+                  {item.role.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="text-white font-bold text-sm">{item.author}</h4>
+                  <h4 className="text-white font-bold text-sm">{item.role.split(',')[0]}</h4> {/* Using role part as name placeholder logic is simplified */}
                   <span className="text-slate-500 text-xs font-mono block">{item.role}</span>
                 </div>
               </div>

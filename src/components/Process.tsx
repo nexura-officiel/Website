@@ -3,52 +3,27 @@
 import { motion } from "framer-motion";
 import { Search, PenTool, Code2, ShieldCheck, Rocket, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
-const steps = [
-  {
-    id: 1,
-    title: "Discovery",
-    subtitle: "SYSTEM ANALYSIS",
-    description: "Deep dive into your business logic, technical debt assessment, and scalability requirement mapping.",
-    icon: Search,
-    color: "from-blue-500 to-cyan-400",
-  },
-  {
-    id: 2,
-    title: "Architecture",
-    subtitle: "BLUEPRINTING",
-    description: "Designing the skeletal structure. We define microservices, data schemas, and cloud infrastructure.",
-    icon: PenTool,
-    color: "from-cyan-400 to-teal-400",
-  },
-  {
-    id: 3,
-    title: "Execution",
-    subtitle: "CORE BUILD",
-    description: "High-velocity development using our curated network of expert engineers under internal lead oversight.",
-    icon: Code2,
-    color: "from-teal-400 to-emerald-400",
-  },
-  {
-    id: 4,
-    title: "Quality",
-    subtitle: "STRESS TESTING",
-    description: "End-to-end security audits, automated testing pipelines, and performance bottleneck optimization.",
-    icon: ShieldCheck,
-    color: "from-emerald-400 to-blue-400",
-  },
-  {
-    id: 5,
-    title: "Launch",
-    subtitle: "DEPLOYMENT",
-    description: "Zero-downtime CI/CD deployment and transition to our long-term technical support ecosystem.",
-    icon: Rocket,
-    color: "from-blue-400 to-indigo-500",
-  },
+const icons = [Search, PenTool, Code2, ShieldCheck, Rocket];
+const colors = [
+  "from-blue-500 to-cyan-400",
+  "from-cyan-400 to-teal-400",
+  "from-teal-400 to-emerald-400",
+  "from-emerald-400 to-blue-400",
+  "from-blue-400 to-indigo-500"
 ];
 
 export default function Process() {
   const [activeStep, setActiveStep] = useState(0);
+  const { t } = useLanguage();
+
+  const steps = t.process.steps.map((step, index) => ({
+    ...step,
+    id: index + 1,
+    icon: icons[index],
+    color: colors[index]
+  }));
 
   return (
     <section id="process" className="py-32 bg-[#030B16] relative overflow-hidden">
@@ -73,17 +48,17 @@ export default function Process() {
               className="flex items-center gap-2 text-electric-cyan font-mono text-sm mb-4"
             >
               <span className="w-8 h-px bg-electric-cyan"></span>
-              METHODOLOGY
+              {t.process.label}
             </motion.div>
             <h2 className="text-4xl md:text-5xl font-sans font-bold text-white leading-tight">
-              The Agency-Architect <br />
+              {t.process.title} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan to-blue-500">
-                Operating Model
+                {t.process.highlight}
               </span>
             </h2>
           </div>
           <p className="text-slate-400 max-w-sm text-sm md:text-base mb-2">
-            We combine the strategic depth of a consultancy with the execution speed of a global dev network.
+            {t.process.description}
           </p>
         </div>
 
@@ -147,11 +122,11 @@ export default function Process() {
                 <div className="flex flex-wrap gap-4">
                   <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs text-slate-400">
                     <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse"></div>
-                    Engineers Managed
+                    {t.process.tags.engineers}
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs text-slate-400">
                     <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse"></div>
-                    Architect Oversight
+                    {t.process.tags.architect}
                   </div>
                 </div>
               </motion.div>

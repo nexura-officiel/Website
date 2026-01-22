@@ -2,39 +2,39 @@
 
 import { motion } from "framer-motion";
 import { Monitor, Bot, Cloud, ArrowUpRight } from "lucide-react";
-
-const services = [
-  {
-    title: "Software Development",
-    description: "Architecting robust SaaS platforms, interactive dashboards, and native mobile applications (React, Flutter, Node.js).",
-    icon: Monitor,
-    tags: ["Web", "Mobile", "SaaS"],
-  },
-  {
-    title: "AI & Automation",
-    description: "Integrating LLMs for intelligent chatbots and automating repetitive workflows using Zapier, Make, and Python.",
-    icon: Bot,
-    tags: ["LLMs", "Chatbots", "Workflows"],
-  },
-  {
-    title: "Cloud & Security",
-    description: "Scalable infrastructure design on AWS/Azure, performance optimization, and rigorous security audits.",
-    icon: Cloud,
-    tags: ["DevOps", "Cybersecurity", "Audit"],
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Services() {
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      ...t.services.items[0],
+      icon: Monitor,
+      tags: ["Web", "Mobile", "SaaS"],
+    },
+    {
+      ...t.services.items[1],
+      icon: Bot,
+      tags: ["LLMs", "Chatbots", "Workflows"],
+    },
+    {
+      ...t.services.items[2],
+      icon: Cloud,
+      tags: ["DevOps", "Cybersecurity", "Audit"],
+    },
+  ];
+
   return (
     <section id="services" className="py-24 bg-midnight-navy relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-sans font-bold text-white mb-4">
-            Technical Capabilities
+            {t.services.title}
           </h2>
           <div className="h-1 w-20 bg-electric-cyan mx-auto rounded-full"></div>
           <p className="mt-4 text-slate-400 max-w-2xl mx-auto">
-            We deliver high-value engineering across the digital spectrum.
+            {t.services.subtitle}
           </p>
         </div>
 
