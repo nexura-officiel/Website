@@ -124,7 +124,7 @@ export default function Contact() {
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      type="spring"
+                      transition={{ type: "spring" }}
                     >
                       <CheckCircle className="text-electric-cyan w-20 h-20 mb-6" />
                     </motion.div>

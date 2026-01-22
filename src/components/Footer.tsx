@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-6">
               <Image 
-                src="/logo.png" 
+                src="/logo-transparent.png" 
                 alt="Nexura Logo" 
                 width={28} 
                 height={28} 
