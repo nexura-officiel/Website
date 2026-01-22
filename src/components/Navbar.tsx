@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
@@ -26,6 +26,33 @@ export default function Navbar() {
     { name: t.nav.process, href: "#process" },
     { name: t.nav.contact, href: "#contact" },
   ];
+
+  const LanguageToggle = () => (
+    <div className="relative flex items-center bg-[#0A1625] border border-white/10 rounded-full p-1 cursor-pointer" onClick={toggleLanguage}>
+      <motion.div
+        className="absolute w-1/2 h-full top-0 bg-electric-cyan rounded-full shadow-[0_0_10px_rgba(0,215,215,0.4)]"
+        initial={false}
+        animate={{
+          left: language === "fr" ? "0%" : "50%",
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      />
+      <button
+        className={`relative z-10 px-3 py-1 text-[10px] font-mono font-bold transition-colors duration-300 ${
+          language === "fr" ? "text-midnight-navy" : "text-slate-400"
+        }`}
+      >
+        FR
+      </button>
+      <button
+        className={`relative z-10 px-3 py-1 text-[10px] font-mono font-bold transition-colors duration-300 ${
+          language === "en" ? "text-midnight-navy" : "text-slate-400"
+        }`}
+      >
+        EN
+      </button>
+    </div>
+  );
 
   return (
     <nav 
@@ -69,14 +96,8 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Language Switcher */}
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-2 font-mono text-xs text-slate-400 hover:text-white border border-white/10 px-3 py-1 rounded bg-white/5 transition-colors"
-            >
-              <Globe size={14} />
-              <span>{language === "fr" ? "FR" : "EN"}</span>
-            </button>
+            {/* Enhanced Language Switcher */}
+            <LanguageToggle />
 
             <Link
               href="#contact"
@@ -89,12 +110,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-4">
              {/* Mobile Language Switcher */}
-             <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-2 font-mono text-xs text-slate-400 hover:text-white border border-white/10 px-3 py-1 rounded bg-white/5 transition-colors"
-            >
-              <span>{language === "fr" ? "FR" : "EN"}</span>
-            </button>
+             <LanguageToggle />
 
             <button
               onClick={() => setIsOpen(!isOpen)}
