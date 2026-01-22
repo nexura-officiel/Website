@@ -50,8 +50,15 @@ export default function Hero() {
       {/* 1. Canvas Particle System */}
       <ParticleBackground />
 
-      {/* 2. Background Grid (Subtle overlay) */}
+      {/* Background Grid (Subtle overlay) */}
       <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
+
+      {/* Decorative Brackets from Brand Charter */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.03]">
+        <div className="absolute top-[10%] left-[5%] text-[12rem] font-mono text-electric-cyan rotate-12 select-none">&lt;</div>
+        <div className="absolute bottom-[20%] right-[10%] text-[15rem] font-mono text-electric-cyan -rotate-12 select-none">&gt;</div>
+        <div className="absolute top-[60%] left-[80%] text-[8rem] font-mono text-electric-cyan -rotate-45 select-none">&lt;/&gt;</div>
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pointer-events-none">
         <motion.div
