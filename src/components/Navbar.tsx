@@ -10,7 +10,7 @@ import { useLanguage } from "@/context/LanguageContext";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { t, language, toggleLanguage } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,25 +28,44 @@ export default function Navbar() {
   ];
 
   const LanguageToggle = () => (
-    <div className="relative flex items-center bg-[#0A1625] border border-white/10 rounded-full p-1 cursor-pointer" onClick={toggleLanguage}>
+    <div className="relative flex items-center bg-midnight-navy border border-white/20 rounded-lg p-1 gap-1 h-9 shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden group">
+      {/* Background Glitch/Scanline Effect */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10 pointer-events-none"></div>
+      
+      {/* Sliding Highlight */}
       <motion.div
-        className="absolute w-1/2 h-full top-0 bg-electric-cyan rounded-full shadow-[0_0_10px_rgba(0,215,215,0.4)]"
+        className="absolute h-[calc(100%-8px)] top-1 bg-electric-cyan rounded md:rounded-md shadow-[0_0_15px_rgba(0,215,215,0.6)] z-0"
         initial={false}
         animate={{
-          left: language === "fr" ? "0%" : "50%",
+          left: language === "fr" ? "4px" : "50%",
+          width: "calc(50% - 6px)",
+          x: language === "en" ? "2px" : "0px" 
         }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        transition={{ type: "spring", stiffness: 400, damping: 30 }}
       />
+
+      {/* FR Button */}
       <button
-        className={`relative z-10 px-3 py-1 text-[10px] font-mono font-bold transition-colors duration-300 ${
-          language === "fr" ? "text-midnight-navy" : "text-slate-400"
+        onClick={() => setLanguage("fr")}
+        className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
+          language === "fr" 
+            ? "text-midnight-navy" 
+            : "text-slate-500 hover:text-white"
         }`}
       >
         FR
       </button>
+
+      {/* Divider */}
+      <div className="w-px h-3 bg-white/10 z-0"></div>
+
+      {/* EN Button */}
       <button
-        className={`relative z-10 px-3 py-1 text-[10px] font-mono font-bold transition-colors duration-300 ${
-          language === "en" ? "text-midnight-navy" : "text-slate-400"
+        onClick={() => setLanguage("en")}
+        className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
+          language === "en" 
+            ? "text-midnight-navy" 
+            : "text-slate-500 hover:text-white"
         }`}
       >
         EN
@@ -66,15 +85,18 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-2">
-              <Image 
-                src="/logo-transparent.png" 
-                alt="Nexura Logo" 
-                width={32} 
-                height={32} 
-                className="w-auto h-8"
-              />
-              <span className="font-sans font-bold text-2xl tracking-wider text-white">
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="relative">
+                <div className="absolute inset-0 bg-electric-cyan/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Image 
+                  src="/logo-transparent.png" 
+                  alt="Nexura Logo" 
+                  width={32} 
+                  height={32} 
+                  className="w-auto h-8 relative z-10"
+                />
+              </div>
+              <span className="font-sans font-bold text-2xl tracking-wider text-white group-hover:text-shadow-glow transition-all">
                 NEXURA
               </span>
             </Link>
@@ -87,11 +109,12 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="font-mono text-sm text-slate-300 hover:text-electric-cyan transition-colors duration-300"
+                  className="font-mono text-sm text-slate-300 hover:text-electric-cyan transition-colors duration-300 relative group"
                 >
-                  <span className="text-electric-cyan mr-1">&lt;</span>
+                  <span className="text-electric-cyan mr-1 opacity-0 group-hover:opacity-100 transition-opacity">&lt;</span>
                   {link.name}
-                  <span className="text-electric-cyan ml-1">/&gt;</span>
+                  <span className="text-electric-cyan ml-1 opacity-0 group-hover:opacity-100 transition-opacity">/&gt;</span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-electric-cyan group-hover:w-full transition-all duration-300"></span>
                 </Link>
               ))}
             </div>
@@ -101,9 +124,10 @@ export default function Navbar() {
 
             <Link
               href="#contact"
-              className="font-sans font-semibold px-6 py-2 border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-midnight-navy transition-all duration-300 rounded-sm"
+              className="relative px-6 py-2 bg-transparent border border-electric-cyan text-electric-cyan font-sans font-semibold rounded-sm overflow-hidden group"
             >
-              {t.nav.startProject}
+              <div className="absolute inset-0 w-0 bg-electric-cyan transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
+              <span className="relative group-hover:text-white transition-colors">{t.nav.startProject}</span>
             </Link>
           </div>
 
