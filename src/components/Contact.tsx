@@ -57,8 +57,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="text-white font-bold mb-1">{t.contact.info.emailLabel}</h4>
-                    <a href="mailto:contact@nexura.com" className="text-slate-400 hover:text-electric-cyan transition-colors font-mono">
-                      contact@nexura.com
+                    <a href="mailto:nexura.officiel@gmail.com" className="text-slate-400 hover:text-electric-cyan transition-colors font-mono">
+                      nexura.officiel@gmail.com
                     </a>
                   </div>
                 </div>

@@ -22,7 +22,7 @@ export default function Navbar() {
 
   const navLinks = [
     { name: t.nav.services, href: "#services" },
-    { name: t.nav.vision, href: "#vision" },
+    { name: t.nav.aboutUs, href: "#aboutUs" },
     { name: t.nav.process, href: "#process" },
     { name: t.nav.contact, href: "#contact" },
   ];

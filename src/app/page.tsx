@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TechStack from "@/components/TechStack";
 import Services from "@/components/Services";
-import Vision from "@/components/Vision";
+import AboutUs from "@/components/AboutUs";
 import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
@@ -16,7 +16,7 @@ export default function Home() {
       <Hero />
       <TechStack />
       <Services />
-      <Vision />
+      <AboutUs />
       <Process />
       <Testimonials />
       <Contact />

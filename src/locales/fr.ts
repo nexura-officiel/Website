@@ -1,7 +1,7 @@
 export const fr = {
   nav: {
     services: "Services",
-    vision: "Vision",
+    aboutUs: "À Propos de Nous",
     process: "Processus",
     contact: "Contact",
     startProject: "LANCER PROJET",
@@ -40,7 +40,7 @@ export const fr = {
       }
     ]
   },
-  vision: {
+  aboutUs: {
     title: "Plus que du Code.",
     highlight: "Ingénierie Stratégique.",
     description: "Nexura est une Agence-Architecte. Nous apportons la rigueur de l'ingénierie d'État à l'agilité du monde numérique. Nous ne faisons pas que coder ; nous concevons des systèmes évolutifs qui créent de la valeur.",
@@ -148,14 +148,10 @@ export const fr = {
   footer: {
     tagline: "Ingénierie du futur des affaires numériques. Nous construisons les systèmes qui propulsent votre croissance.",
     headers: {
-      services: "Services",
+      sitemap: "Plan du Site",
       legal: "Légal"
     },
     links: {
-      web: "Développement Web",
-      mobile: "Apps Mobiles",
-      ai: "Solutions IA",
-      cloud: "Architecture Cloud",
       privacy: "Politique de Confidentialité",
       terms: "Conditions d'Utilisation"
     },

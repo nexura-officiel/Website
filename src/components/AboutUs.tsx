@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
-export default function Vision() {
+export default function AboutUs() {
   const { t } = useLanguage();
 
   return (
-    <section id="vision" className="py-24 bg-[#08182B] relative overflow-hidden">
+    <section id="aboutUs" className="py-24 bg-[#08182B] relative overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-electric-cyan/20 to-transparent"></div>
         
@@ -21,15 +21,15 @@ export default function Vision() {
              viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-sans font-bold text-white mb-6">
-              {t.vision.title}<br />
-              <span className="text-electric-cyan">{t.vision.highlight}</span>
+              {t.aboutUs.title}<br />
+              <span className="text-electric-cyan">{t.aboutUs.highlight}</span>
             </h2>
             <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-              {t.vision.description}
+              {t.aboutUs.description}
             </p>
 
             <ul className="space-y-4">
-              {t.vision.points.map((item, i) => (
+              {t.aboutUs.points.map((item, i) => (
                 <li key={i} className="flex items-center gap-3 text-slate-300">
                   <CheckCircle2 className="text-electric-cyan shrink-0" size={20} />
                   <span>{item}</span>

@@ -1,7 +1,7 @@
 export const en = {
   nav: {
     services: "Services",
-    vision: "Vision",
+    aboutUs: "About Us",
     process: "Process",
     contact: "Contact",
     startProject: "START PROJECT",
@@ -40,7 +40,7 @@ export const en = {
       }
     ]
   },
-  vision: {
+  aboutUs: {
     title: "More Than Just Code.",
     highlight: "Strategic Engineering.",
     description: "Nexura is an Agency-Architect. We bring the rigor of state-certified engineering to the agility of the digital world. We don't just build software; we design scalable systems that drive business value.",
@@ -148,14 +148,10 @@ export const en = {
   footer: {
     tagline: "Engineering the future of digital business. We build the systems that power your growth.",
     headers: {
-      services: "Services",
+      sitemap: "Sitemap",
       legal: "Legal"
     },
     links: {
-      web: "Web Development",
-      mobile: "Mobile Apps",
-      ai: "AI Solutions",
-      cloud: "Cloud Architecture",
       privacy: "Privacy Policy",
       terms: "Terms of Service"
     },
