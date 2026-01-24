@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
@@ -12,6 +13,15 @@ import TiltCard from "@/components/ui/TiltCard";
 
 export default function AboutPage() {
   const { t } = useLanguage();
+  const [dataPoints, setDataPoints] = useState<{ top: string; left: string }[]>([]);
+
+  useEffect(() => {
+    const points = Array.from({ length: 6 }).map(() => ({
+      top: `${20 + Math.random() * 60}%`,
+      left: `${20 + Math.random() * 60}%`,
+    }));
+    setDataPoints(points);
+  }, []);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -193,7 +203,7 @@ class Core extends AI {
                 </div>
 
                 {/* Floating Data Points */}
-                {[...Array(6)].map((_, i) => (
+                {dataPoints.map((point, i) => (
                   <motion.div
                     key={i}
                     animate={{
@@ -208,8 +218,8 @@ class Core extends AI {
                     }}
                     className="absolute w-1 h-1 bg-white rounded-full"
                     style={{
-                      top: `${20 + Math.random() * 60}%`,
-                      left: `${20 + Math.random() * 60}%`,
+                      top: point.top,
+                      left: point.left,
                     }}
                   />
                 ))}
