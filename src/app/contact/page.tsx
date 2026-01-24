@@ -137,7 +137,7 @@ export default function ContactPage() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="bg-[#0B1221]/80 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+                  className="bg-[#0B1221]/80 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl min-h-[500px]"
                 >
                   {/* Terminal Header */}
                   <div className="bg-white/5 px-4 py-3 border-b border-white/5 flex items-center justify-between">
@@ -153,7 +153,7 @@ export default function ContactPage() {
                     <div className="w-12"></div>
                   </div>
 
-                  <div className="p-8">
+                  <div className="p-10">
                     {submitted ? (
                       <div className="flex flex-col items-center justify-center py-12 text-center h-[400px]">
                         <motion.div

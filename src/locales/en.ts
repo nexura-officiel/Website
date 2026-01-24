@@ -52,6 +52,23 @@ export const en = {
       "Advanced AI Integration Capabilities"
     ],
     readMoreButton: "Read More",
+    systemStatus: "nexura.system.about_module",
+    titlePrefix: "More Than",
+    titleHighlight: "Just Code.",
+    startInnovation: "Start Innovation",
+    philosophy: "Our Philosophy",
+    scrollExplore: "Scroll to Explore",
+    features: [
+      { title: "Engineering First", desc: "Rigorous code quality and architectural patterns." },
+      { title: "AI Integration", desc: "Smart systems that learn and adapt to your data." },
+      { title: "Global Scale", desc: "Infrastructure built to handle millions of requests." }
+    ],
+    mockCode: {
+      buildSuccess: "BUILD SUCCESSFUL",
+      optimizedBy: "Optimized by Nexura Engine"
+    },
+    exploreTech: "Explore Technical Capabilities",
+    viewTechStack: "View Our Tech Stack",
     extendedDescription: "Nexura is a leading software engineering agency dedicated to transforming innovative ideas into robust, scalable, and high-performance digital solutions. With a deep expertise in cutting-edge technologies like AI, cloud architecture, and modern web frameworks, we partner with businesses to navigate the complexities of the digital landscape and achieve their strategic objectives. Our approach combines rigorous engineering principles with agile methodologies, ensuring rapid development cycles, exceptional quality, and measurable business impact.",
     servicesOverview: "Our core services encompass comprehensive software development, from bespoke web and mobile applications to enterprise-grade SaaS platforms. We specialize in AI integration, leveraging machine learning and intelligent automation to create smart, efficient systems. Furthermore, our cloud architecture expertise ensures your infrastructure is secure, scalable, and optimized for peak performance.",
     missionTitle: "Our Mission",

@@ -62,12 +62,12 @@ export default function AboutPage() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-electric-cyan opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-electric-cyan"></span>
               </span>
-              nexura.system.about_module
+              {t.aboutUs.systemStatus}
             </motion.div>
             
             <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-bold font-sans tracking-tight text-white mb-6 leading-tight">
-              More Than <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan to-purple-500">Just Code.</span>
+              {t.aboutUs.titlePrefix} <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan to-purple-500">{t.aboutUs.titleHighlight}</span>
             </motion.h1>
             
             <motion.p variants={fadeInUp} className="text-lg md:text-xl text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
@@ -76,11 +76,11 @@ export default function AboutPage() {
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                <Link href="/contact" className="px-8 py-4 bg-electric-cyan text-[#020617] font-bold rounded-sm hover:shadow-[0_0_30px_rgba(0,215,215,0.4)] transition-all duration-300 flex items-center justify-center gap-2 group">
-                  Start Innovation
+                  {t.aboutUs.startInnovation}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                </Link>
                <Link href="#mission" className="px-8 py-4 border border-white/10 bg-white/5 backdrop-blur-sm text-white font-medium rounded-sm hover:bg-white/10 transition-all duration-300 flex items-center justify-center">
-                  Our Philosophy
+                  {t.aboutUs.philosophy}
                </Link>
             </motion.div>
           </motion.div>
@@ -234,7 +234,7 @@ class Core extends AI {
           transition={{ delay: 1.5, duration: 1 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500"
         >
-          <span className="text-xs uppercase tracking-widest">Scroll to Explore</span>
+          <span className="text-xs uppercase tracking-widest">{t.aboutUs.scrollExplore}</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-electric-cyan/50 to-transparent"></div>
         </motion.div>
       </section>
@@ -256,26 +256,25 @@ class Core extends AI {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-            {[
-              { icon: Code, title: "Engineering First", desc: "Rigorous code quality and architectural patterns." },
-              { icon: Cpu, title: "AI Integration", desc: "Smart systems that learn and adapt to your data." },
-              { icon: Globe, title: "Global Scale", desc: "Infrastructure built to handle millions of requests." }
-            ].map((feature, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="p-8 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 transition-colors group"
-              >
-                <div className="w-14 h-14 bg-electric-cyan/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <feature.icon className="text-electric-cyan w-7 h-7" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                <p className="text-slate-400">{feature.desc}</p>
-              </motion.div>
-            ))}
+            {t.aboutUs.features.map((feature, idx) => {
+              const Icon = [Code, Cpu, Globe][idx];
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="p-8 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 transition-colors group"
+                >
+                  <div className="w-14 h-14 bg-electric-cyan/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="text-electric-cyan w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                  <p className="text-slate-400">{feature.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -307,7 +306,7 @@ class Core extends AI {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {t.aboutUs.points.map((point, i) => (
                   <TiltCard key={i} className="h-full">
-                    <div className="p-6 bg-[#0F172A] border border-slate-800 rounded-xl h-full flex flex-col hover:border-electric-cyan/50 transition-colors duration-300">
+                    <div className="p-6 bg-[#0F172A] border border-slate-800 rounded-xl h-full min-h-[140px] flex flex-col hover:border-electric-cyan/50 transition-colors duration-300">
                       <CheckCircle2 className="text-electric-cyan mb-4 w-8 h-8" />
                       <p className="text-slate-200 font-medium text-lg">{point}</p>
                     </div>
@@ -368,7 +367,7 @@ class Core extends AI {
            </p>
            <Link href="/services" className="inline-block relative px-8 py-3 overflow-hidden rounded-full group bg-transparent border border-electric-cyan text-electric-cyan font-semibold hover:text-[#020617] transition-colors duration-300">
              <span className="absolute inset-0 w-full h-full bg-electric-cyan scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-             <span className="relative z-10">Explore Technical Capabilities</span>
+             <span className="relative z-10">{t.aboutUs.exploreTech}</span>
            </Link>
         </div>
       </section>
@@ -386,15 +385,13 @@ class Core extends AI {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
                  <Link
                     href="/contact"
-                    className="relative px-12 py-5 bg-electric-cyan text-midnight-navy text-lg font-bold rounded-sm overflow-hidden group hover:shadow-[0_0_40px_rgba(0,215,215,0.3)] transition-all duration-300"
+                    className="relative px-14 py-6 bg-electric-cyan text-midnight-navy text-xl font-bold rounded-sm overflow-hidden group hover:shadow-[0_0_60px_rgba(0,215,215,0.5)] transition-all duration-300"
                 >
-                    <span className="relative z-10">{t.aboutUs.ctaButton}</span>
-                </Link>
-                <Link
-                    href="/services"
-                    className="text-slate-300 hover:text-white underline underline-offset-4 decoration-electric-cyan/50 hover:decoration-electric-cyan transition-all"
-                >
-                    View Our Tech Stack
+                    <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 skew-y-12"></span>
+                    <span className="relative z-10 flex items-center gap-3">
+                        {t.aboutUs.ctaButton}
+                        <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                    </span>
                 </Link>
             </div>
         </div>

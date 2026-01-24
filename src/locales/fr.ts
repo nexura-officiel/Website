@@ -52,6 +52,23 @@ export const fr = {
       "Capacités d'Intégration IA Avancées"
     ],
     readMoreButton: "En Savoir Plus",
+    systemStatus: "nexura.system.about_module",
+    titlePrefix: "Plus que",
+    titleHighlight: "du simple Code.",
+    startInnovation: "Lancer l'Innovation",
+    philosophy: "Notre Philosophie",
+    scrollExplore: "Défiler pour Explorer",
+    features: [
+      { title: "Ingénierie D'abord", desc: "Qualité de code rigoureuse et patterns architecturaux." },
+      { title: "Intégration IA", desc: "Systèmes intelligents qui apprennent et s'adaptent à vos données." },
+      { title: "Échelle Globale", desc: "Infrastructure bâtie pour gérer des millions de requêtes." }
+    ],
+    mockCode: {
+      buildSuccess: "BUILD SUCCÈS",
+      optimizedBy: "Optimisé par Nexura Engine"
+    },
+    exploreTech: "Explorer Capacités Techniques",
+    viewTechStack: "Voir Notre Stack Technique",
     extendedDescription: "Nexura est une agence d'ingénierie logicielle de pointe dédiée à transformer les idées innovantes en solutions numériques robustes, évolutives et performantes. Avec une expertise approfondie dans les technologies de pointe telles que l'IA, l'architecture cloud et les frameworks web modernes, nous nous associons aux entreprises pour naviguer dans les complexités du paysage numérique et atteindre leurs objectifs stratégiques. Notre approche combine des principes d'ingénierie rigoureux avec des méthodologies agiles, garantissant des cycles de développement rapides, une qualité exceptionnelle et un impact commercial mesurable.",
     servicesOverview: "Nos services principaux englobent le développement logiciel complet, des applications web et mobiles sur mesure aux plateformes SaaS de niveau entreprise. Nous sommes spécialisés dans l'intégration de l'IA, en tirant parti de l'apprentissage automatique et de l'automatisation intelligente pour créer des systèmes intelligents et efficaces. De plus, notre expertise en architecture cloud garantit que votre infrastructure est sécurisée, évolutive et optimisée pour des performances optimales.",
     missionTitle: "Notre Mission",

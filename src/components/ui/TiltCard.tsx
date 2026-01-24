@@ -48,7 +48,7 @@ export default function TiltCard({ children, className }: { children: React.Reac
       }}
       className={`relative ${className}`}
     >
-      <div style={{ transform: "translateZ(50px)" }}>
+      <div className="h-full" style={{ transform: "translateZ(50px)" }}>
         {children}
       </div>
     </motion.div>
