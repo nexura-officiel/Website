@@ -51,17 +51,17 @@ export default function Contact() {
               </p>
 
               <div className="space-y-8">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center border border-white/10 shrink-0 text-electric-cyan">
-                    <Mail size={24} />
-                  </div>
-                  <div>
-                    <h4 className="text-white font-bold mb-1">{t.contact.info.emailLabel}</h4>
-                    <a href="mailto:nexura.officiel@gmail.com" className="text-slate-400 hover:text-electric-cyan transition-colors font-mono">
-                      nexura.officiel@gmail.com
-                    </a>
-                  </div>
-                </div>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-electric-cyan/10 rounded-lg flex items-center justify-center text-electric-cyan shrink-0">
+                <Mail size={20} />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm text-slate-500">{t.contact.info.emailLabel}</span>
+                <a href="mailto:contact@nexura.ma" className="text-slate-400 hover:text-electric-cyan transition-colors font-mono">
+                  contact@nexura.ma
+                </a>
+              </div>
+            </div>
 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center border border-white/10 shrink-0 text-electric-cyan">

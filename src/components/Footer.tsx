@@ -11,9 +11,9 @@ export default function Footer() {
   const [copied, setCopied] = useState(false); // State for copy feedback
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('nexura.officiel@gmail.com');
+    navigator.clipboard.writeText('contact@nexura.ma');
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // Reset copied status after 2 seconds
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
