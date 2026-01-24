@@ -38,7 +38,8 @@ export const en = {
         title: "Cloud & Security",
         description: "Scalable infrastructure design on AWS/Azure, performance optimization, and rigorous security audits.",
       }
-    ]
+    ],
+    moreServicesButton: "More Services"
   },
   aboutUs: {
     title: "More Than Just Code.",
@@ -49,7 +50,16 @@ export const en = {
       "Business-First ROI Focus",
       "Agile Execution with Premium Quality Control",
       "Advanced AI Integration Capabilities"
-    ]
+    ],
+    readMoreButton: "Read More",
+    extendedDescription: "Nexura is a leading software engineering agency dedicated to transforming innovative ideas into robust, scalable, and high-performance digital solutions. With a deep expertise in cutting-edge technologies like AI, cloud architecture, and modern web frameworks, we partner with businesses to navigate the complexities of the digital landscape and achieve their strategic objectives. Our approach combines rigorous engineering principles with agile methodologies, ensuring rapid development cycles, exceptional quality, and measurable business impact.",
+    servicesOverview: "Our core services encompass comprehensive software development, from bespoke web and mobile applications to enterprise-grade SaaS platforms. We specialize in AI integration, leveraging machine learning and intelligent automation to create smart, efficient systems. Furthermore, our cloud architecture expertise ensures your infrastructure is secure, scalable, and optimized for peak performance.",
+    missionTitle: "Our Mission",
+    missionDescription: "At Nexura, our mission is to empower businesses through innovative software engineering. We craft bespoke digital solutions that drive efficiency, foster growth, and redefine industry standards.",
+    coreServicesTitle: "Our Core Services",
+    ctaTitle: "Ready to Transform Your Business?",
+    ctaDescription: "Partner with Nexura to build innovative solutions that drive your success in the digital era.",
+    ctaButton: "Get in Touch"
   },
   process: {
     label: "METHODOLOGY",

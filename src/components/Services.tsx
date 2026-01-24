@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Monitor, Bot, Cloud, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -77,6 +78,16 @@ export default function Services() {
               </TiltCard>
             </motion.div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link
+            href="/services"
+            className="relative px-6 py-3 bg-transparent border border-electric-cyan text-electric-cyan font-sans font-semibold rounded-sm overflow-hidden group"
+          >
+            <div className="absolute inset-0 w-0 bg-electric-cyan transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
+            <span className="relative group-hover:text-white transition-colors">{t.services.moreServicesButton}</span>
+          </Link>
         </div>
       </div>
     </section>

@@ -38,7 +38,8 @@ export const fr = {
         title: "Cloud & Sécurité",
         description: "Conception d'infrastructures évolutives sur AWS/Azure, optimisation des performances et audits de sécurité rigoureux.",
       }
-    ]
+    ],
+    moreServicesButton: "Plus de Services"
   },
   aboutUs: {
     title: "Plus que du Code.",
@@ -49,7 +50,16 @@ export const fr = {
       "Approche ROI Business-First",
       "Exécution Agile avec Contrôle Qualité Premium",
       "Capacités d'Intégration IA Avancées"
-    ]
+    ],
+    readMoreButton: "En Savoir Plus",
+    extendedDescription: "Nexura est une agence d'ingénierie logicielle de pointe dédiée à transformer les idées innovantes en solutions numériques robustes, évolutives et performantes. Avec une expertise approfondie dans les technologies de pointe telles que l'IA, l'architecture cloud et les frameworks web modernes, nous nous associons aux entreprises pour naviguer dans les complexités du paysage numérique et atteindre leurs objectifs stratégiques. Notre approche combine des principes d'ingénierie rigoureux avec des méthodologies agiles, garantissant des cycles de développement rapides, une qualité exceptionnelle et un impact commercial mesurable.",
+    servicesOverview: "Nos services principaux englobent le développement logiciel complet, des applications web et mobiles sur mesure aux plateformes SaaS de niveau entreprise. Nous sommes spécialisés dans l'intégration de l'IA, en tirant parti de l'apprentissage automatique et de l'automatisation intelligente pour créer des systèmes intelligents et efficaces. De plus, notre expertise en architecture cloud garantit que votre infrastructure est sécurisée, évolutive et optimisée pour des performances optimales.",
+    missionTitle: "Notre Mission",
+    missionDescription: "Chez Nexura, notre mission est de donner aux entreprises les moyens de l'ingénierie logicielle innovante. Nous élaborons des solutions numériques sur mesure qui favorisent l'efficacité, stimulent la croissance et redéfinissent les standards de l'industrie.",
+    coreServicesTitle: "Nos Services Principaux",
+    ctaTitle: "Prêt à Transformer Votre Entreprise ?",
+    ctaDescription: "Associez-vous à Nexura pour construire des solutions innovantes qui propulseront votre succès à l'ère numérique.",
+    ctaButton: "Nous Contacter"
   },
   process: {
     label: "MÉTHODOLOGIE",
