@@ -41,6 +41,18 @@ export const en = {
     ],
     moreServicesButton: "More Services"
   },
+  industries: {
+    title: "Industries Engineered",
+    subtitle: "Vertical-specific expertise for specialized markets.",
+    items: [
+      { name: "FinTech", desc: "High-frequency trading & secure ledgers" },
+      { name: "HealthTech", desc: "HIPAA-compliant patient data systems" },
+      { name: "Logistics", desc: "Real-time fleet tracking & optimization" },
+      { name: "E-Commerce", desc: "High-scale headless storefronts" },
+      { name: "Real Estate", desc: "Virtual tours & property management" },
+      { name: "EdTech", desc: "Interactive learning management systems" }
+    ]
+  },
   aboutUs: {
     title: "More Than Just Code",
     highlight: "Strategic Engineering.",

@@ -41,6 +41,18 @@ export const fr = {
     ],
     moreServicesButton: "Plus de Services"
   },
+  industries: {
+    title: "Industries Servies",
+    subtitle: "Expertise verticale pour des marchés spécialisés.",
+    items: [
+      { name: "FinTech", desc: "Trading haute fréquence & registres sécurisés" },
+      { name: "HealthTech", desc: "Systèmes de données patients conformes" },
+      { name: "Logistique", desc: "Suivi de flotte temps réel & optimisation" },
+      { name: "E-Commerce", desc: "Boutiques headless à grande échelle" },
+      { name: "Immobilier", desc: "Visites virtuelles & gestion locative" },
+      { name: "EdTech", desc: "Systèmes de gestion d'apprentissage interactifs" }
+    ]
+  },
   aboutUs: {
     title: "Plus que du Code",
     highlight: "Ingénierie Stratégique.",
