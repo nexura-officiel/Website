@@ -19,7 +19,7 @@ COPY . .
 ENV PORT=3000
 # Ensure Next.js can detect file changes in some environments
 ENV WATCHPACK_POLLING=true
-CMD ["npm", "run", "dev"]
+CMD ["npx", "next", "dev", "--webpack"]
 
 # Rebuild the source code only when needed
 FROM base AS builder
