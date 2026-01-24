@@ -3,7 +3,9 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { CheckCircle2 } from "lucide-react"; // Import CheckCircle2
+import Image from "next/image";
+import { motion } from "framer-motion"; // Import motion
+import { CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function AboutPage() {
@@ -13,15 +15,52 @@ export default function AboutPage() {
     <main className="min-h-screen bg-midnight-navy text-white selection:bg-electric-cyan selection:text-midnight-navy">
       <Navbar />
 
-      {/* Simplified Hero Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 text-center bg-midnight-navy border-b border-white/10">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold font-sans text-white leading-tight mb-4">
-            {t.aboutUs.title}
-          </h1>
-          <p className="text-lg md:text-xl text-slate-300">
-            {t.aboutUs.extendedDescription}
-          </p>
+      {/* Improved Hero Section */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-midnight-navy border-b border-white/10 overflow-hidden">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
+          <Image
+            src="/grid.svg"
+            alt="background pattern"
+            layout="fill"
+            objectFit="cover"
+            className="filter invert grayscale"
+          />
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="text-center md:text-left">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-5xl md:text-6xl font-bold font-sans text-white leading-tight mb-4"
+            >
+              {t.aboutUs.title}
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg md:text-xl text-slate-300"
+            >
+              {t.aboutUs.extendedDescription}
+            </motion.p>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex justify-center items-center"
+          >
+            <Image
+              src="/Nexura.png"
+              alt="Nexura visual"
+              width={400}
+              height={400}
+              className="w-full max-w-sm h-auto opacity-80"
+            />
+          </motion.div>
         </div>
       </section>
 

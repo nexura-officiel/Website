@@ -42,7 +42,7 @@ export const fr = {
     moreServicesButton: "Plus de Services"
   },
   aboutUs: {
-    title: "Plus que du Code.",
+    title: "Plus que du Code",
     highlight: "Ingénierie Stratégique.",
     description: "Nexura est une Agence-Architecte. Nous apportons la rigueur de l'ingénierie d'État à l'agilité du monde numérique. Nous ne faisons pas que coder ; nous concevons des systèmes évolutifs qui créent de la valeur.",
     points: [

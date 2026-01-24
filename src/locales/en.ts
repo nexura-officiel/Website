@@ -42,7 +42,7 @@ export const en = {
     moreServicesButton: "More Services"
   },
   aboutUs: {
-    title: "More Than Just Code.",
+    title: "More Than Just Code",
     highlight: "Strategic Engineering.",
     description: "Nexura is an Agency-Architect. We bring the rigor of state-certified engineering to the agility of the digital world. We don't just build software; we design scalable systems that drive business value.",
     points: [
