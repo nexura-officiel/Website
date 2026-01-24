@@ -7,53 +7,71 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 
-const LanguageToggle = ({ language, setLanguage }) => (
-  <div className="relative flex items-center bg-midnight-navy border border-white/20 rounded-lg p-1 gap-1 h-9 shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden group">
-    {/* Background Glitch/Scanline Effect */}
-    <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10 pointer-events-none"></div>
-    
-    {/* Sliding Highlight */}
-    <motion.div
-      className="absolute h-[calc(100%-8px)] top-1 bg-electric-cyan rounded md:rounded-md shadow-[0_0_15px_rgba(0,215,215,0.6)] z-0"
-      initial={false}
-      animate={{
-        left: language === "fr" ? "4px" : "50%",
-        width: "calc(50% - 6px)",
-        x: language === "en" ? "2px" : "0px" 
-      }}
-      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-    />
-
-    {/* FR Button */}
-    <button
-      onClick={() => setLanguage("fr")}
-      className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
-        language === "fr" 
-          ? "text-midnight-navy" 
-          : "text-slate-500 hover:text-white"
-      }`}
-    >
-      FR
-    </button>
-
-    {/* Divider */}
-    <div className="w-px h-3 bg-white/10 z-0"></div>
-
-    {/* EN Button */}
-    <button
-      onClick={() => setLanguage("en")}
-      className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
-        language === "en" 
-          ? "text-midnight-navy" 
-          : "text-slate-500 hover:text-white"
-      }`}
-    >
-      EN
-    </button>
-  </div>
-);
-
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { t, language, setLanguage } = useLanguage();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: t.nav.services, href: "#services" },
+    { name: t.nav.aboutUs, href: "#aboutUs" },
+    { name: t.nav.process, href: "#process" },
+    { name: t.nav.contact, href: "#contact" },
+  ];
+
+  const LanguageToggle = () => (
+    <div className="relative flex items-center bg-midnight-navy border border-white/20 rounded-lg p-1 gap-1 h-9 shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden group">
+      {/* Background Glitch/Scanline Effect */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10 pointer-events-none"></div>
+      
+      {/* Sliding Highlight */}
+      <motion.div
+        className="absolute h-[calc(100%-8px)] top-1 bg-electric-cyan rounded md:rounded-md shadow-[0_0_15px_rgba(0,215,215,0.6)] z-0"
+        initial={false}
+        animate={{
+          left: language === "fr" ? "4px" : "50%",
+          width: "calc(50% - 6px)",
+          x: language === "en" ? "2px" : "0px" 
+        }}
+        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+      />
+
+      {/* FR Button */}
+      <button
+        onClick={() => setLanguage("fr")}
+        className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
+          language === "fr" 
+            ? "text-midnight-navy" 
+            : "text-slate-500 hover:text-white"
+        }`}
+      >
+        FR
+      </button>
+
+      {/* Divider */}
+      <div className="w-px h-3 bg-white/10 z-0"></div>
+
+      {/* EN Button */}
+      <button
+        onClick={() => setLanguage("en")}
+        className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
+          language === "en" 
+            ? "text-midnight-navy" 
+            : "text-slate-500 hover:text-white"
+        }`}
+      >
+        EN
+      </button>
+    </div>
+  );
 
   return (
     <nav 
