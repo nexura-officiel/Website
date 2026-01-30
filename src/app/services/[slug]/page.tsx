@@ -107,6 +107,7 @@ export default function ServiceDetailPage() {
                       fill
                       style={{ objectFit: "cover" }}
                       className="group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   </div>
@@ -118,7 +119,7 @@ export default function ServiceDetailPage() {
                       {project.description}
                     </p>
                     <div className="flex flex-wrap items-center gap-3">
-                      <Code size={16} className="text-slate-500" />
+                      
                       {project.tags.map((tag) => (
                         <span key={tag} className="text-sm font-mono px-3 py-1 bg-white/5 text-slate-300 rounded-full border border-white/10 group-hover:border-electric-cyan/20 transition-colors">
                           {tag}
