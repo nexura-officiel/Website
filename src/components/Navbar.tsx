@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,6 +12,9 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { t, language, setLanguage } = useLanguage();
+  const params = useParams();
+  const slug = params.slug ? (Array.isArray(params.slug) ? params.slug[0] : params.slug) : undefined;
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +50,7 @@ export default function Navbar() {
 
       {/* FR Button */}
       <button
-        onClick={() => setLanguage("fr")}
+        onClick={() => setLanguage("fr", slug)}
         className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
           language === "fr" 
             ? "text-midnight-navy" 
@@ -61,7 +65,7 @@ export default function Navbar() {
 
       {/* EN Button */}
       <button
-        onClick={() => setLanguage("en")}
+        onClick={() => setLanguage("en", slug)}
         className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
           language === "en" 
             ? "text-midnight-navy" 

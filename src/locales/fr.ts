@@ -27,16 +27,56 @@ export const fr = {
     subtitle: "Nous délivrons une ingénierie à haute valeur ajoutée sur tout le spectre numérique.",
     items: [
       {
+        id: "software-development",
         title: "Développement Logiciel",
+        slug: "developpement-logiciel",
         description: "Architecture de plateformes SaaS robustes, tableaux de bord interactifs et applications mobiles natives (React, Flutter, Node.js).",
+        projects: [
+          {
+            id: "project-alpha",
+            name: "Projet Alpha",
+            description: "Une plateforme SaaS complète pour la gestion de projet.",
+            image: "https://placehold.co/600x400/00d7d7/020617?text=Projet+Alpha",
+            tags: ["React", "Node.js", "SaaS"],
+          },
+          {
+            id: "project-beta",
+            name: "Projet Beta",
+            description: "Une application mobile pour le suivi des objectifs de fitness.",
+            image: "https://placehold.co/600x400/00d7d7/020617?text=Projet+Beta",
+            tags: ["Flutter", "Firebase", "Mobile"],
+          },
+        ],
       },
       {
+        id: "ai-automation",
         title: "IA & Automatisation",
+        slug: "ia-automatisation",
         description: "Intégration de LLMs pour chatbots intelligents et automatisation de flux répétitifs via Zapier, Make et Python.",
+        projects: [
+          {
+            id: "project-gamma",
+            name: "Projet Gamma",
+            description: "Un chatbot alimenté par l'IA pour le support client.",
+            image: "https://placehold.co/600x400/00d7d7/020617?text=Projet+Gamma",
+            tags: ["LLM", "Python", "Chatbot"],
+          },
+        ],
       },
       {
+        id: "cloud-security",
         title: "Cloud & Sécurité",
+        slug: "cloud-securite",
         description: "Conception d'infrastructures évolutives sur AWS/Azure, optimisation des performances et audits de sécurité rigoureux.",
+        projects: [
+          {
+            id: "project-delta",
+            name: "Projet Delta",
+            description: "Une infrastructure cloud sécurisée et évolutive pour une startup fintech.",
+            image: "https://placehold.co/600x400/00d7d7/020617?text=Projet+Delta",
+            tags: ["AWS", "DevOps", "Sécurité"],
+          },
+        ],
       }
     ],
     moreServicesButton: "Plus de Services"
@@ -196,5 +236,13 @@ export const fr = {
     },
     rights: "Tous droits réservés.",
     builtBy: "Conçu & Développé par Nexura Engineering"
+  },
+  serviceDetailPage: {
+    backToServices: "Retour aux Services",
+    relatedProjects: "Projets Connexes",
+    serviceNotFound: "",
+    serviceNotFoundMessage: "",
+    caseStudy: "Étude de Cas",
+    ourPortfolio: "Notre Portfolio"
   }
 };

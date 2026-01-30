@@ -80,90 +80,91 @@ export default function ServicesPage() {
               const isEven = index % 2 === 0;
               
               return (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8 }}
-                >
-                  <TiltCard className="h-full">
-                    <div className="group relative bg-[#0B1221]/60 backdrop-blur-md border border-white/5 rounded-3xl p-8 md:p-12 overflow-hidden hover:border-electric-cyan/30 transition-all duration-500">
-                      
-                      {/* Hover Gradient Background */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      
-                      <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-16 items-center">
+                <Link key={index} href={`/services/${service.slug}`}>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    <TiltCard className="h-full">
+                      <div className="group relative bg-[#0B1221]/60 backdrop-blur-md border border-white/5 rounded-3xl p-8 md:p-12 overflow-hidden hover:border-electric-cyan/30 transition-all duration-500">
                         
-                        {/* Icon Visual */}
-                        <div className={`order-1 ${isEven ? 'md:order-1' : 'md:order-2'} shrink-0`}>
-                           <div className="relative w-32 h-32 md:w-48 md:h-48 flex items-center justify-center">
-                              {/* Rotating Rings */}
-                              <div className="absolute inset-0 border border-electric-cyan/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
-                              <div className="absolute inset-4 border border-dashed border-purple-500/20 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
-                              
-                              {/* Core Icon */}
-                              <div className="bg-[#020617] p-6 rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,215,215,0.15)] group-hover:scale-110 transition-transform duration-500">
-                                 <IconComponent size={48} className="text-electric-cyan" />
-                              </div>
-                           </div>
+                        {/* Hover Gradient Background */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-16 items-center">
+                          
+                          {/* Icon Visual */}
+                          <div className={`order-1 ${isEven ? 'md:order-1' : 'md:order-2'} shrink-0`}>
+                            <div className="relative w-32 h-32 md:w-48 md:h-48 flex items-center justify-center">
+                                {/* Rotating Rings */}
+                                <div className="absolute inset-0 border border-electric-cyan/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                                <div className="absolute inset-4 border border-dashed border-purple-500/20 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                                
+                                {/* Core Icon */}
+                                <div className="bg-[#020617] p-6 rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,215,215,0.15)] group-hover:scale-110 transition-transform duration-500">
+                                  <IconComponent size={48} className="text-electric-cyan" />
+                                </div>
+                            </div>
+                          </div>
+
+                          {/* Content */}
+                          <div className={`flex-1 text-center ${isEven ? 'md:text-left' : 'md:text-right'} order-2 ${isEven ? 'md:order-2' : 'md:order-1'}`}>
+                            
+                            <div className={`flex items-center gap-4 mb-4 ${isEven ? 'justify-center md:justify-start' : 'justify-center md:justify-end'}`}>
+                                <div className="inline-block px-3 py-1 text-xs font-mono text-electric-cyan border border-electric-cyan/20 rounded bg-electric-cyan/5">
+                                  MODULE_0{index + 1}
+                                </div>
+                                <div className="flex items-center gap-2 text-[10px] font-mono text-emerald-400">
+                                  <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                                  </span>
+                                  STATUS: ONLINE
+                                </div>
+                            </div>
+
+                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 group-hover:text-electric-cyan transition-colors">
+                                {service.title}
+                            </h2>
+                            <p className="text-lg text-slate-400 leading-relaxed mb-8">
+                                {service.description}
+                            </p>
+                            
+                            {/* Tech Specs / Tags */}
+                            <div className={`flex flex-wrap gap-3 mb-8 ${isEven ? 'justify-center md:justify-start' : 'justify-center md:justify-end'}`}>
+                                {[
+                                  ["React", "Next.js", "Node.js"], 
+                                  ["Python", "TensorFlow", "OpenAI"], 
+                                  ["AWS", "Docker", "Kubernetes"]
+                                ][index]?.map((tag, tIdx) => (
+                                  <span key={tIdx} className="px-3 py-1 bg-white/5 text-slate-300 text-sm rounded-full border border-white/5 group-hover:border-electric-cyan/20 transition-colors">
+                                      {tag}
+                                  </span>
+                                ))}
+                            </div>
+
+                            {/* Mock System Metrics */}
+                            <div className={`flex flex-col gap-2 max-w-xs ${isEven ? 'mr-auto' : 'ml-auto'}`}>
+                                <div className="flex justify-between text-[10px] font-mono text-slate-500 uppercase">
+                                  <span>System Load</span>
+                                  <span>{85 + index * 5}%</span>
+                                </div>
+                                <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                                  <div 
+                                      className="h-full bg-electric-cyan/50" 
+                                      style={{ width: `${85 + index * 5}%` }}
+                                  ></div>
+                                </div>
+                            </div>
+                          </div>
+
                         </div>
-
-                        {/* Content */}
-                        <div className={`flex-1 text-center ${isEven ? 'md:text-left' : 'md:text-right'} order-2 ${isEven ? 'md:order-2' : 'md:order-1'}`}>
-                           
-                           <div className={`flex items-center gap-4 mb-4 ${isEven ? 'justify-center md:justify-start' : 'justify-center md:justify-end'}`}>
-                              <div className="inline-block px-3 py-1 text-xs font-mono text-electric-cyan border border-electric-cyan/20 rounded bg-electric-cyan/5">
-                                 MODULE_0{index + 1}
-                              </div>
-                              <div className="flex items-center gap-2 text-[10px] font-mono text-emerald-400">
-                                 <span className="relative flex h-2 w-2">
-                                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-                                 </span>
-                                 STATUS: ONLINE
-                              </div>
-                           </div>
-
-                           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 group-hover:text-electric-cyan transition-colors">
-                              {service.title}
-                           </h2>
-                           <p className="text-lg text-slate-400 leading-relaxed mb-8">
-                              {service.description}
-                           </p>
-                           
-                           {/* Tech Specs / Tags */}
-                           <div className={`flex flex-wrap gap-3 mb-8 ${isEven ? 'justify-center md:justify-start' : 'justify-center md:justify-end'}`}>
-                              {[
-                                ["React", "Next.js", "Node.js"], 
-                                ["Python", "TensorFlow", "OpenAI"], 
-                                ["AWS", "Docker", "Kubernetes"]
-                              ][index]?.map((tag, tIdx) => (
-                                 <span key={tIdx} className="px-3 py-1 bg-white/5 text-slate-300 text-sm rounded-full border border-white/5 group-hover:border-electric-cyan/20 transition-colors">
-                                    {tag}
-                                 </span>
-                              ))}
-                           </div>
-
-                           {/* Mock System Metrics */}
-                           <div className={`flex flex-col gap-2 max-w-xs ${isEven ? 'mr-auto' : 'ml-auto'}`}>
-                              <div className="flex justify-between text-[10px] font-mono text-slate-500 uppercase">
-                                 <span>System Load</span>
-                                 <span>{85 + index * 5}%</span>
-                              </div>
-                              <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                                 <div 
-                                    className="h-full bg-electric-cyan/50" 
-                                    style={{ width: `${85 + index * 5}%` }}
-                                 ></div>
-                              </div>
-                           </div>
-                        </div>
-
                       </div>
-                    </div>
-                  </TiltCard>
-                </motion.div>
+                    </TiltCard>
+                  </motion.div>
+                </Link>
               );
             })}
           </div>

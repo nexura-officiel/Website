@@ -27,16 +27,56 @@ export const en = {
     subtitle: "We deliver high-value engineering across the digital spectrum.",
     items: [
       {
+        id: "software-development",
         title: "Software Development",
+        slug: "software-development",
         description: "Architecting robust SaaS platforms, interactive dashboards, and native mobile applications (React, Flutter, Node.js).",
+        projects: [
+          {
+            id: "project-alpha",
+            name: "Project Alpha",
+            description: "A comprehensive SaaS platform for project management.",
+            image: "https://placehold.co/600x400/00d7d7/020617?text=Project+Alpha",
+            tags: ["React", "Node.js", "SaaS"],
+          },
+          {
+            id: "project-beta",
+            name: "Project Beta",
+            description: "A mobile app for tracking fitness goals.",
+            image: "https://placehold.co/600x400/00d7d7/020617?text=Project+Beta",
+            tags: ["Flutter", "Firebase", "Mobile"],
+          },
+        ],
       },
       {
+        id: "ai-automation",
         title: "AI & Automation",
+        slug: "ai-automation",
         description: "Integrating LLMs for intelligent chatbots and automating repetitive workflows using Zapier, Make, and Python.",
+        projects: [
+          {
+            id: "project-gamma",
+            name: "Project Gamma",
+            description: "An AI-powered chatbot for customer support.",
+            image: "https://placehold.co/600x400/00d7d7/020617?text=Project+Gamma",
+            tags: ["LLM", "Python", "Chatbot"],
+          },
+        ],
       },
       {
+        id: "cloud-security",
         title: "Cloud & Security",
+        slug: "cloud-security",
         description: "Scalable infrastructure design on AWS/Azure, performance optimization, and rigorous security audits.",
+        projects: [
+          {
+            id: "project-delta",
+            name: "Project Delta",
+            description: "A secure and scalable cloud infrastructure for a fintech startup.",
+            image: "https://placehold.co/600x400/00d7d7/020617?text=Project+Delta",
+            tags: ["AWS", "DevOps", "Security"],
+          },
+        ],
       }
     ],
     moreServicesButton: "More Services"
@@ -196,5 +236,13 @@ export const en = {
     },
     rights: "All rights reserved.",
     builtBy: "Designed & Built by Nexura Engineering"
+  },
+  serviceDetailPage: {
+    backToServices: "Back to Services",
+    relatedProjects: "Related Projects",
+    serviceNotFound: "",
+    serviceNotFoundMessage: "",
+    caseStudy: "Case Study",
+    ourPortfolio: "Our Portfolio"
   }
 };

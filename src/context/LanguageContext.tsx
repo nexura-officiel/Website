@@ -1,26 +1,46 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
+import { useRouter, useParams } from "next/navigation";
 import { en } from "@/locales/en";
 import { fr } from "@/locales/fr";
 
 type Language = "fr" | "en";
-type Dictionary = typeof fr; // Using French as the type definition source
+type Dictionary = typeof fr;
 
 interface LanguageContextType {
   language: Language;
   t: Dictionary;
-  toggleLanguage: () => void;
-  setLanguage: (lang: Language) => void;
+  toggleLanguage: (slug?: string) => void;
+  setLanguage: (lang: Language, slug?: string) => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("fr"); // Default to French
+  const [language, setInternalLanguage] = useState<Language>("fr");
+  const router = useRouter();
+  const params = useParams();
 
-  const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "fr" ? "en" : "fr"));
+  const setLanguage = (lang: Language, slug?: string) => {
+    const oldLangData = language === "fr" ? fr : en;
+    const newLangData = lang === "fr" ? fr : en;
+
+    if (slug) {
+      const currentService = oldLangData.services.items.find(item => item.slug === slug);
+      if (currentService) {
+        const newService = newLangData.services.items.find(item => item.id === currentService.id);
+        if (newService) {
+          router.push(`/services/${newService.slug}`);
+        }
+      }
+    }
+    setInternalLanguage(lang);
+  };
+
+  const toggleLanguage = (slug?: string) => {
+    const newLang = language === "fr" ? "en" : "fr";
+    setLanguage(newLang, slug);
   };
 
   const t = language === "fr" ? fr : en;

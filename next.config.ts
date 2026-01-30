@@ -4,6 +4,15 @@ const nextConfig: NextConfig = {
   /* config options here */
   output: "standalone",
   reactCompiler: true,
+  turbopack: {},
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+      },
+    ],
+  },
   webpack: (config) => {
     config.watchOptions = {
       poll: 1000,
