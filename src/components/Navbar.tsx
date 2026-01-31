@@ -13,7 +13,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { t, language, setLanguage } = useLanguage();
   const params = useParams();
-  const slug = params.slug ? (Array.isArray(params.slug) ? params.slug[0] : params.slug) : undefined;
+  const serviceSlug = params.serviceSlug ? (Array.isArray(params.serviceSlug) ? params.serviceSlug[0] : params.serviceSlug) : undefined;
+  const projectSlug = params.projectSlug ? (Array.isArray(params.projectSlug) ? params.projectSlug[0] : params.projectSlug) : undefined;
 
 
   useEffect(() => {
@@ -50,7 +51,7 @@ export default function Navbar() {
 
       {/* FR Button */}
       <button
-        onClick={() => setLanguage("fr", slug)}
+        onClick={() => setLanguage("fr", serviceSlug, projectSlug)}
         className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
           language === "fr" 
             ? "text-midnight-navy" 
@@ -65,7 +66,7 @@ export default function Navbar() {
 
       {/* EN Button */}
       <button
-        onClick={() => setLanguage("en", slug)}
+        onClick={() => setLanguage("en", serviceSlug, projectSlug)}
         className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
           language === "en" 
             ? "text-midnight-navy" 
