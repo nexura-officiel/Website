@@ -92,46 +92,47 @@ export default function ServiceDetailPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {service.projects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-              >
-                <div className="group relative bg-[#0B1221]/50 backdrop-blur-lg border border-white/5 rounded-2xl h-full overflow-hidden transition-all duration-300 hover:border-electric-cyan/30 hover:shadow-2xl hover:shadow-electric-cyan/10">
-                  <div className="relative h-60 w-full overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.name}
-                      fill
-                      style={{ objectFit: "cover" }}
-                      className="group-hover:scale-105 transition-transform duration-500"
-                      unoptimized
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                  </div>
-                  <div className="p-6 md:p-8">
-                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-electric-cyan transition-colors duration-300">
-                      {project.name}
-                    </h3>
-                    <p className="text-slate-400 text-base mb-6 leading-relaxed">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap items-center gap-3">
-                      
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="text-sm font-mono px-3 py-1 bg-white/5 text-slate-300 rounded-full border border-white/10 group-hover:border-electric-cyan/20 transition-colors">
-                          {tag}
-                        </span>
-                      ))}
+              <Link key={project.id} href={`/services/${service.slug}/projects/${project.id}`}>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                >
+                  <div className="group relative bg-[#0B1221]/50 backdrop-blur-lg border border-white/5 rounded-2xl h-full overflow-hidden transition-all duration-300 hover:border-electric-cyan/30 hover:shadow-2xl hover:shadow-electric-cyan/10">
+                    <div className="relative h-60 w-full overflow-hidden">
+                      <Image
+                        src={project.image}
+                        alt={project.name}
+                        fill
+                        style={{ objectFit: "cover" }}
+                        className="group-hover:scale-105 transition-transform duration-500"
+                        unoptimized
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                     </div>
-                  </div>
-                   <div className="absolute top-4 right-4 px-3 py-1 text-xs font-mono text-electric-cyan border border-electric-cyan/20 rounded-full bg-electric-cyan/5 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {t.serviceDetailPage.caseStudy}
+                    <div className="p-6 md:p-8">
+                      <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-electric-cyan transition-colors duration-300">
+                        {project.name}
+                      </h3>
+                      <p className="text-slate-400 text-base mb-6 leading-relaxed">
+                        {project.description}
+                      </p>
+                      <div className="flex flex-wrap items-center gap-3">
+                        
+                        {project.tags.map((tag) => (
+                          <span key={tag} className="text-sm font-mono px-3 py-1 bg-white/5 text-slate-300 rounded-full border border-white/10 group-hover:border-electric-cyan/20 transition-colors">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                </div>
-              </motion.div>
+                    <div className="absolute top-4 right-4 px-3 py-1 text-xs font-mono text-electric-cyan border border-electric-cyan/20 rounded-full bg-electric-cyan/5 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {t.serviceDetailPage.caseStudy}
+                      </div>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
