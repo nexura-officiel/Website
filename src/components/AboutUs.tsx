@@ -10,16 +10,16 @@ export default function AboutUs() {
 
   return (
     <section id="aboutUs" className="py-24 bg-[#08182B] relative overflow-hidden">
-        {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-electric-cyan/20 to-transparent"></div>
-        
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-electric-cyan/20 to-transparent"></div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
+
           <motion.div
-             initial={{ opacity: 0, x: -20 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-sans font-bold text-white mb-6">
               {t.aboutUs.title}<br />
@@ -40,10 +40,10 @@ export default function AboutUs() {
           </motion.div>
 
           <motion.div
-             initial={{ opacity: 0, x: 20 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
-             className="relative"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="relative"
           >
             {/* Abstract Code Visual */}
             <div className="bg-midnight-navy border border-white/10 rounded-lg p-6 font-mono text-sm relative shadow-2xl">
@@ -54,44 +54,44 @@ export default function AboutUs() {
               </div>
               <div className="space-y-2 text-slate-400">
                 <div className="flex">
-                    <span className="text-slate-600 w-8 text-right mr-4 select-none">1</span>
-                    <span><span className="text-purple-400">class</span> <span className="text-yellow-400">NexuraEngine</span> <span className="text-white">&lbrace;</span></span>
+                  <span className="text-slate-600 w-8 text-right mr-4 select-none">1</span>
+                  <span><span className="text-purple-400">class</span> <span className="text-yellow-400">NexuraEngine</span> <span className="text-white">&lbrace;</span></span>
                 </div>
                 <div className="flex">
-                    <span className="text-slate-600 w-8 text-right mr-4 select-none">2</span>
-                    <span className="pl-4"><span className="text-purple-400">constructor</span>() <span className="text-white">&lbrace;</span></span>
+                  <span className="text-slate-600 w-8 text-right mr-4 select-none">2</span>
+                  <span className="pl-4"><span className="text-purple-400">constructor</span>() <span className="text-white">&lbrace;</span></span>
                 </div>
                 <div className="flex">
-                    <span className="text-slate-600 w-8 text-right mr-4 select-none">3</span>
-                    <span className="pl-8"><span className="text-blue-400">this</span>.quality = <span className="text-electric-cyan">"Premium"</span>;</span>
+                  <span className="text-slate-600 w-8 text-right mr-4 select-none">3</span>
+                  <span className="pl-8"><span className="text-blue-400">this</span>.quality = <span className="text-electric-cyan">&quot;Premium&quot;</span>;</span>
                 </div>
                 <div className="flex">
-                    <span className="text-slate-600 w-8 text-right mr-4 select-none">4</span>
-                    <span className="pl-8"><span className="text-blue-400">this</span>.architecture = <span className="text-electric-cyan">"Scalable"</span>;</span>
+                  <span className="text-slate-600 w-8 text-right mr-4 select-none">4</span>
+                  <span className="pl-8"><span className="text-blue-400">this</span>.architecture = <span className="text-electric-cyan">&quot;Scalable&quot;</span>;</span>
                 </div>
                 <div className="flex">
-                    <span className="text-slate-600 w-8 text-right mr-4 select-none">5</span>
-                    <span className="pl-4"><span className="text-white">&rbrace;</span></span>
+                  <span className="text-slate-600 w-8 text-right mr-4 select-none">5</span>
+                  <span className="pl-4"><span className="text-white">&rbrace;</span></span>
                 </div>
                 <div className="flex">
-                    <span className="text-slate-600 w-8 text-right mr-4 select-none">6</span>
-                    <span></span>
+                  <span className="text-slate-600 w-8 text-right mr-4 select-none">6</span>
+                  <span></span>
                 </div>
                 <div className="flex">
-                    <span className="text-slate-600 w-8 text-right mr-4 select-none">7</span>
-                    <span className="pl-4"><span className="text-purple-400">optimize</span>(<span className="text-orange-400">business</span>) <span className="text-white">&lbrace;</span></span>
+                  <span className="text-slate-600 w-8 text-right mr-4 select-none">7</span>
+                  <span className="pl-4"><span className="text-purple-400">optimize</span>(<span className="text-orange-400">business</span>) <span className="text-white">&lbrace;</span></span>
                 </div>
                 <div className="flex">
-                    <span className="text-slate-600 w-8 text-right mr-4 select-none">8</span>
-                    <span className="pl-8"><span className="text-purple-400">return</span> business.growth * <span className="text-electric-cyan">2.0</span>;</span>
+                  <span className="text-slate-600 w-8 text-right mr-4 select-none">8</span>
+                  <span className="pl-8"><span className="text-purple-400">return</span> business.growth * <span className="text-electric-cyan">2.0</span>;</span>
                 </div>
                 <div className="flex">
-                    <span className="text-slate-600 w-8 text-right mr-4 select-none">9</span>
-                    <span className="pl-4"><span className="text-white">&rbrace;</span></span>
+                  <span className="text-slate-600 w-8 text-right mr-4 select-none">9</span>
+                  <span className="pl-4"><span className="text-white">&rbrace;</span></span>
                 </div>
                 <div className="flex">
-                    <span className="text-slate-600 w-8 text-right mr-4 select-none">10</span>
-                    <span className="text-white">&rbrace;</span>
+                  <span className="text-slate-600 w-8 text-right mr-4 select-none">10</span>
+                  <span className="text-white">&rbrace;</span>
                 </div>
               </div>
 

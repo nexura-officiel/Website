@@ -14,65 +14,68 @@ export default function ParticleBackground() {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    const particles: Particle[] = [];
-    const particleCount = Math.min(Math.floor(window.innerWidth / 10), 100); // Responsive count
-    const connectionDistance = 150;
-    const mouseDistance = 200;
 
-    let mouse = { x: 0, y: 0 };
-
-    class Particle {
+    interface Particle {
       x: number;
       y: number;
       vx: number;
       vy: number;
       size: number;
-
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.size = Math.random() * 2 + 1;
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        // Bounce off edges
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-
-        // Mouse interaction (gentle repulsion)
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < mouseDistance) {
-          const forceDirectionX = dx / distance;
-          const forceDirectionY = dy / distance;
-          const force = (mouseDistance - distance) / mouseDistance;
-          const directionX = forceDirectionX * force * 0.6;
-          const directionY = forceDirectionY * force * 0.6;
-
-          this.x -= directionX;
-          this.y -= directionY;
-        }
-      }
-
-      draw() {
-        if (!ctx) return;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(0, 215, 215, 0.5)"; // Electric Cyan
-        ctx.fill();
-      }
+      update: () => void;
+      draw: () => void;
     }
+
+    const particles: Particle[] = [];
+    const particleCount = Math.min(Math.floor(window.innerWidth / 10), 100); // Responsive count
+    const connectionDistance = 150;
+    const mouseDistance = 200;
+
+    const mouse = { x: 0, y: 0 };
+
+    const createParticle = (): Particle => {
+      const x = Math.random() * width;
+      const y = Math.random() * height;
+      const vx = (Math.random() - 0.5) * 0.5;
+      const vy = (Math.random() - 0.5) * 0.5;
+      const size = Math.random() * 2 + 1;
+
+      return {
+        x, y, vx, vy, size,
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+
+          if (this.x < 0 || this.x > width) this.vx *= -1;
+          if (this.y < 0 || this.y > height) this.vy *= -1;
+
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < mouseDistance) {
+            const forceDirectionX = dx / distance;
+            const forceDirectionY = dy / distance;
+            const force = (mouseDistance - distance) / mouseDistance;
+            const directionX = forceDirectionX * force * 0.6;
+            const directionY = forceDirectionY * force * 0.6;
+
+            this.x -= directionX;
+            this.y -= directionY;
+          }
+        },
+        draw() {
+          if (!ctx) return;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(0, 215, 215, 0.5)";
+          ctx.fill();
+        }
+      };
+    };
 
     // Initialize particles
     for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
+      particles.push(createParticle());
     }
 
     function animate() {
@@ -91,9 +94,8 @@ export default function ParticleBackground() {
 
           if (distance < connectionDistance) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 215, 215, ${
-              1 - distance / connectionDistance
-            })`; // Fade out
+            ctx.strokeStyle = `rgba(0, 215, 215, ${1 - distance / connectionDistance
+              })`; // Fade out
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[index].x, particles[index].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -114,11 +116,11 @@ export default function ParticleBackground() {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-        // Get relative coordinates if canvas is not full screen, 
-        // but here it is absolute background, so clientX is fine
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
+      // Get relative coordinates if canvas is not full screen, 
+      // but here it is absolute background, so clientX is fine
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
     };
 
     window.addEventListener("resize", handleResize);

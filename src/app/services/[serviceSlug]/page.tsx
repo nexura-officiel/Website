@@ -13,7 +13,7 @@ import TiltCard from "@/components/ui/TiltCard";
 
 import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
-import { Service, Project } from "@/types";
+import { Service } from "@/types";
 
 export default function ServiceDetailPage() {
   const { t, language } = useLanguage();
@@ -54,12 +54,13 @@ export default function ServiceDetailPage() {
         };
 
         // 2. Fetch Projects for this service
-        const { data: projectData, error: projectError } = await supabase
+        const { data: projectData } = await supabase
           .from('projects')
           .select('*')
           .eq('service_id', serviceData.id);
 
         if (projectData) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           mappedService.projects = projectData.map((p: any) => ({
             id: p.slug, // Use slug as ID for routing consistency
             slug: p.slug,
@@ -163,7 +164,7 @@ export default function ServiceDetailPage() {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="flex flex-wrap gap-4"
             >
-              {service.tags && service.tags.map((tag, i) => (
+              {service.tags && service.tags.map((tag) => (
                 <span key={tag} className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-mono text-electric-cyan backdrop-blur-sm">
                   #{tag}
                 </span>

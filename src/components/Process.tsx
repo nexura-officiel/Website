@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, PenTool, Code2, ShieldCheck, Rocket, ArrowRight } from "lucide-react";
+import { Search, PenTool, Code2, ShieldCheck, Rocket } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -41,7 +41,7 @@ export default function Process() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
           <div className="max-w-2xl">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -70,15 +70,13 @@ export default function Process() {
                 key={step.id}
                 onMouseEnter={() => setActiveStep(index)}
                 onClick={() => setActiveStep(index)}
-                className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-300 text-left min-w-[200px] lg:min-w-0 border ${
-                  activeStep === index 
-                    ? "bg-white/10 border-electric-cyan/50 shadow-[0_0_20px_rgba(0,215,215,0.1)]" 
+                className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-300 text-left min-w-[200px] lg:min-w-0 border ${activeStep === index
+                    ? "bg-white/10 border-electric-cyan/50 shadow-[0_0_20px_rgba(0,215,215,0.1)]"
                     : "bg-transparent border-transparent hover:bg-white/5"
-                }`}
+                  }`}
               >
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border transition-colors ${
-                  activeStep === index ? "bg-electric-cyan border-electric-cyan text-midnight-navy" : "bg-midnight-navy border-white/10 text-slate-500"
-                }`}>
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border transition-colors ${activeStep === index ? "bg-electric-cyan border-electric-cyan text-midnight-navy" : "bg-midnight-navy border-white/10 text-slate-500"
+                  }`}>
                   <step.icon size={20} />
                 </div>
                 <div>
@@ -98,7 +96,7 @@ export default function Process() {
             <div className="relative bg-midnight-navy border border-white/10 rounded-2xl p-8 md:p-12 overflow-hidden min-h-[400px] flex flex-col justify-center">
               {/* Animated Gradient Background */}
               <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${steps[activeStep].color} opacity-[0.03] blur-[100px] transition-all duration-700`}></div>
-              
+
               <motion.div
                 key={activeStep}
                 initial={{ opacity: 0, y: 20 }}
@@ -110,11 +108,11 @@ export default function Process() {
                   <div className="h-px w-12 bg-electric-cyan/30"></div>
                   <span className="font-mono text-sm tracking-widest uppercase">{steps[activeStep].subtitle}</span>
                 </div>
-                
+
                 <h3 className="text-3xl md:text-5xl font-bold text-white mb-8">
                   {steps[activeStep].title}
                 </h3>
-                
+
                 <p className="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl mb-10">
                   {steps[activeStep].description}
                 </p>

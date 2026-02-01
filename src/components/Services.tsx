@@ -37,6 +37,7 @@ export default function Services() {
         }
 
         if (data) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const mappedServices: Service[] = data.map((svc: any) => ({
             id: svc.id,
             slug: svc.slug,

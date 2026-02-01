@@ -2,37 +2,15 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useParams } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { t, language, setLanguage } = useLanguage();
-  const params = useParams();
-  const serviceSlug = params.serviceSlug ? (Array.isArray(params.serviceSlug) ? params.serviceSlug[0] : params.serviceSlug) : undefined;
-  const projectSlug = params.projectSlug ? (Array.isArray(params.projectSlug) ? params.projectSlug[0] : params.projectSlug) : undefined;
+const LanguageToggle = () => {
+  const { language, setLanguage } = useLanguage();
 
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navLinks = [
-    { name: t.nav.services, href: "#services" },
-    { name: t.nav.aboutUs, href: "#aboutUs" },
-    { name: t.nav.process, href: "#process" },
-    { name: t.nav.contact, href: "#contact" },
-  ];
-
-  const LanguageToggle = () => (
+  return (
     <div className="relative flex items-center bg-midnight-navy border border-white/20 rounded-lg p-1 gap-1 h-9 shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden group">
       {/* Background Glitch/Scanline Effect */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10 pointer-events-none"></div>
@@ -51,10 +29,10 @@ export default function Navbar() {
 
       {/* FR Button */}
       <button
-        onClick={() => setLanguage("fr", serviceSlug, projectSlug)}
+        onClick={() => setLanguage("fr")}
         className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${language === "fr"
-            ? "text-midnight-navy"
-            : "text-slate-500 hover:text-white"
+          ? "text-midnight-navy"
+          : "text-slate-500 hover:text-white"
           }`}
       >
         FR
@@ -65,22 +43,44 @@ export default function Navbar() {
 
       {/* EN Button */}
       <button
-        onClick={() => setLanguage("en", serviceSlug, projectSlug)}
+        onClick={() => setLanguage("en")}
         className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${language === "en"
-            ? "text-midnight-navy"
-            : "text-slate-500 hover:text-white"
+          ? "text-midnight-navy"
+          : "text-slate-500 hover:text-white"
           }`}
       >
         EN
       </button>
     </div>
   );
+};
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: t.nav.services, href: "#services" },
+    { name: t.nav.aboutUs, href: "#aboutUs" },
+    { name: t.nav.process, href: "#process" },
+    { name: t.nav.contact, href: "#contact" },
+  ];
 
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
-          ? "bg-midnight-navy/90 backdrop-blur-md border-b border-white/10 shadow-lg"
-          : "bg-transparent border-transparent"
+        ? "bg-midnight-navy/90 backdrop-blur-md border-b border-white/10 shadow-lg"
+        : "bg-transparent border-transparent"
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

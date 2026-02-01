@@ -1,12 +1,13 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { CheckCircle2, ArrowRight, Code, Cpu, Globe, Server, Shield, Zap } from "lucide-react";
+import { motion, Variants } from "framer-motion";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { CheckCircle2, ArrowRight, Code, Cpu, Globe, Shield, Zap } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import ParticleBackground from "@/components/ui/ParticleBackground";
 import TiltCard from "@/components/ui/TiltCard";
@@ -20,15 +21,16 @@ export default function AboutPage() {
       top: `${20 + Math.random() * 60}%`,
       left: `${20 + Math.random() * 60}%`,
     }));
+    // eslint-disable-next-line
     setDataPoints(points);
   }, []);
 
-  const fadeInUp = {
+  const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
   };
 
-  const staggerContainer = {
+  const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -45,13 +47,13 @@ export default function AboutPage() {
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden">
         <ParticleBackground />
-        
+
         {/* Abstract Gradient Glows */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-electric-cyan/20 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
         <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] -z-10"></div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div 
+          <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
@@ -64,171 +66,171 @@ export default function AboutPage() {
               </span>
               {t.aboutUs.systemStatus}
             </motion.div>
-            
+
             <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-bold font-sans tracking-tight text-white mb-6 leading-tight">
               {t.aboutUs.titlePrefix} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan to-purple-500">{t.aboutUs.titleHighlight}</span>
             </motion.h1>
-            
+
             <motion.p variants={fadeInUp} className="text-lg md:text-xl text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
               {t.aboutUs.extendedDescription}
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-               <Link href="/contact" className="px-8 py-4 bg-electric-cyan text-[#020617] font-bold rounded-sm hover:shadow-[0_0_30px_rgba(0,215,215,0.4)] transition-all duration-300 flex items-center justify-center gap-2 group">
-                  {t.aboutUs.startInnovation}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-               </Link>
-               <Link href="#mission" className="px-8 py-4 border border-white/10 bg-white/5 backdrop-blur-sm text-white font-medium rounded-sm hover:bg-white/10 transition-all duration-300 flex items-center justify-center">
-                  {t.aboutUs.philosophy}
-               </Link>
+              <Link href="/contact" className="px-8 py-4 bg-electric-cyan text-[#020617] font-bold rounded-sm hover:shadow-[0_0_30px_rgba(0,215,215,0.4)] transition-all duration-300 flex items-center justify-center gap-2 group">
+                {t.aboutUs.startInnovation}
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link href="#mission" className="px-8 py-4 border border-white/10 bg-white/5 backdrop-blur-sm text-white font-medium rounded-sm hover:bg-white/10 transition-all duration-300 flex items-center justify-center">
+                {t.aboutUs.philosophy}
+              </Link>
             </motion.div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
             className="relative hidden lg:flex items-center justify-center min-h-[500px]"
           >
-             {/* --- Engineering Core Visual --- */}
-             <div className="relative w-full max-w-[550px] aspect-square flex items-center justify-center">
-                
-                {/* Outer Orbit */}
-                <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 border border-electric-cyan/10 rounded-full"
+            {/* --- Engineering Core Visual --- */}
+            <div className="relative w-full max-w-[550px] aspect-square flex items-center justify-center">
+
+              {/* Outer Orbit */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 border border-electric-cyan/10 rounded-full"
+              >
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-electric-cyan rounded-full shadow-[0_0_15px_#00d7d7]"></div>
+              </motion.div>
+
+              {/* Middle Orbit */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[15%] border border-purple-500/20 rounded-full border-dashed"
+              >
+                <div className="absolute bottom-0 right-1/2 translate-x-1/2 w-3 h-3 bg-purple-500 rounded-full shadow-[0_0_15px_#a855f7] opacity-60"></div>
+              </motion.div>
+
+              {/* Inner Orbit */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[30%] border border-electric-cyan/30 rounded-full"
+              >
+                <div className="absolute top-1/2 left-0 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-[0_0_10px_#fff]"></div>
+              </motion.div>
+
+              {/* Central Core Glow */}
+              <div className="absolute inset-1/3 bg-electric-cyan/10 rounded-full blur-[80px] animate-pulse"></div>
+
+              {/* --- The Digital Monolith (Architectural Stack) --- */}
+              <div className="relative w-80 h-96 [transform-style:preserve-3d] [transform:rotateX(60deg)_rotateZ(-45deg)]">
+
+                {/* Layer 1: Infrastructure (Bottom) */}
+                <motion.div
+                  initial={{ translateZ: 0, opacity: 0 }}
+                  animate={{ translateZ: 0, opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 1 }}
+                  className="absolute inset-0 bg-slate-900/80 border-2 border-slate-700/50 rounded-xl shadow-[0_0_30px_rgba(2,6,23,0.8)] backdrop-blur-sm grid grid-cols-4 grid-rows-4 gap-1 p-4"
                 >
-                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-electric-cyan rounded-full shadow-[0_0_15px_#00d7d7]"></div>
+                  {[...Array(16)].map((_, i) => (
+                    <div key={i} className={`rounded-sm ${i % 3 === 0 ? 'bg-slate-700/30' : 'bg-transparent'}`}></div>
+                  ))}
+                  <div className="absolute -right-12 top-0 text-slate-500 text-xs font-mono -rotate-90 origin-top-left">INFRASTRUCTURE</div>
                 </motion.div>
 
-                {/* Middle Orbit */}
-                <motion.div 
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-[15%] border border-purple-500/20 rounded-full border-dashed"
+                {/* Layer 2: Logic (Middle) */}
+                <motion.div
+                  initial={{ translateZ: 0, opacity: 0 }}
+                  animate={{ translateZ: 80, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 1, type: "spring" }}
+                  className="absolute inset-0 bg-purple-900/20 border-2 border-purple-500/30 rounded-xl shadow-lg backdrop-blur-sm flex items-center justify-center overflow-hidden"
                 >
-                   <div className="absolute bottom-0 right-1/2 translate-x-1/2 w-3 h-3 bg-purple-500 rounded-full shadow-[0_0_15px_#a855f7] opacity-60"></div>
-                </motion.div>
-
-                {/* Inner Orbit */}
-                <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-[30%] border border-electric-cyan/30 rounded-full"
-                >
-                   <div className="absolute top-1/2 left-0 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-[0_0_10px_#fff]"></div>
-                </motion.div>
-
-                {/* Central Core Glow */}
-                <div className="absolute inset-1/3 bg-electric-cyan/10 rounded-full blur-[80px] animate-pulse"></div>
-
-                {/* --- The Digital Monolith (Architectural Stack) --- */}
-                <div className="relative w-80 h-96 [transform-style:preserve-3d] [transform:rotateX(60deg)_rotateZ(-45deg)]">
-                  
-                  {/* Layer 1: Infrastructure (Bottom) */}
-                  <motion.div
-                    initial={{ translateZ: 0, opacity: 0 }}
-                    animate={{ translateZ: 0, opacity: 1 }}
-                    transition={{ delay: 0.2, duration: 1 }}
-                    className="absolute inset-0 bg-slate-900/80 border-2 border-slate-700/50 rounded-xl shadow-[0_0_30px_rgba(2,6,23,0.8)] backdrop-blur-sm grid grid-cols-4 grid-rows-4 gap-1 p-4"
-                  >
-                     {[...Array(16)].map((_, i) => (
-                        <div key={i} className={`rounded-sm ${i % 3 === 0 ? 'bg-slate-700/30' : 'bg-transparent'}`}></div>
-                     ))}
-                     <div className="absolute -right-12 top-0 text-slate-500 text-xs font-mono -rotate-90 origin-top-left">INFRASTRUCTURE</div>
-                  </motion.div>
-
-                  {/* Layer 2: Logic (Middle) */}
-                  <motion.div
-                    initial={{ translateZ: 0, opacity: 0 }}
-                    animate={{ translateZ: 80, opacity: 1 }}
-                    transition={{ delay: 0.6, duration: 1, type: "spring" }}
-                    className="absolute inset-0 bg-purple-900/20 border-2 border-purple-500/30 rounded-xl shadow-lg backdrop-blur-sm flex items-center justify-center overflow-hidden"
-                  >
-                     <div className="font-mono text-purple-300/50 text-xs p-2 leading-none whitespace-pre opacity-50">
-{`function optimized() {
+                  <div className="font-mono text-purple-300/50 text-xs p-2 leading-none whitespace-pre opacity-50">
+                    {`function optimized() {
   return true;
 }
 class Core extends AI {
   init() { ... }
 }`}
-                     </div>
-                     <div className="absolute -right-12 top-0 text-purple-400 text-xs font-mono -rotate-90 origin-top-left">LOGIC_CORE</div>
-                  </motion.div>
+                  </div>
+                  <div className="absolute -right-12 top-0 text-purple-400 text-xs font-mono -rotate-90 origin-top-left">LOGIC_CORE</div>
+                </motion.div>
 
-                  {/* Layer 3: Interface (Top) */}
-                  <motion.div
-                    initial={{ translateZ: 0, opacity: 0 }}
-                    animate={{ translateZ: 160, opacity: 1 }}
-                    transition={{ delay: 1.0, duration: 1, type: "spring" }}
-                    className="absolute inset-0 bg-electric-cyan/10 border-2 border-electric-cyan/50 rounded-xl shadow-[0_0_40px_rgba(0,215,215,0.2)] backdrop-blur-sm flex flex-col p-4 gap-2"
-                  >
-                     {/* Mock UI Elements */}
-                     <div className="flex gap-2">
-                        <div className="w-8 h-8 rounded-full bg-electric-cyan/20 border border-electric-cyan/50"></div>
-                        <div className="flex-1 h-8 rounded-md bg-electric-cyan/10"></div>
-                     </div>
-                     <div className="flex-1 rounded-md bg-electric-cyan/5 border border-electric-cyan/10 grid grid-cols-2 gap-2 p-2">
-                        <div className="bg-electric-cyan/20 rounded"></div>
-                        <div className="bg-electric-cyan/20 rounded"></div>
-                     </div>
-                     <div className="absolute -right-12 top-0 text-electric-cyan text-xs font-mono -rotate-90 origin-top-left">INTERFACE</div>
-                  </motion.div>
+                {/* Layer 3: Interface (Top) */}
+                <motion.div
+                  initial={{ translateZ: 0, opacity: 0 }}
+                  animate={{ translateZ: 160, opacity: 1 }}
+                  transition={{ delay: 1.0, duration: 1, type: "spring" }}
+                  className="absolute inset-0 bg-electric-cyan/10 border-2 border-electric-cyan/50 rounded-xl shadow-[0_0_40px_rgba(0,215,215,0.2)] backdrop-blur-sm flex flex-col p-4 gap-2"
+                >
+                  {/* Mock UI Elements */}
+                  <div className="flex gap-2">
+                    <div className="w-8 h-8 rounded-full bg-electric-cyan/20 border border-electric-cyan/50"></div>
+                    <div className="flex-1 h-8 rounded-md bg-electric-cyan/10"></div>
+                  </div>
+                  <div className="flex-1 rounded-md bg-electric-cyan/5 border border-electric-cyan/10 grid grid-cols-2 gap-2 p-2">
+                    <div className="bg-electric-cyan/20 rounded"></div>
+                    <div className="bg-electric-cyan/20 rounded"></div>
+                  </div>
+                  <div className="absolute -right-12 top-0 text-electric-cyan text-xs font-mono -rotate-90 origin-top-left">INTERFACE</div>
+                </motion.div>
 
-                  {/* Central Data Beam */}
-                  <motion.div 
-                    initial={{ height: 0 }}
-                    animate={{ height: 200 }}
-                    transition={{ delay: 1.5, duration: 1 }}
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1 bg-white/80 shadow-[0_0_20px_white] [transform:translateZ(0)] origin-bottom"
-                  ></motion.div>
+                {/* Central Data Beam */}
+                <motion.div
+                  initial={{ height: 0 }}
+                  animate={{ height: 200 }}
+                  transition={{ delay: 1.5, duration: 1 }}
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1 bg-white/80 shadow-[0_0_20px_white] [transform:translateZ(0)] origin-bottom"
+                ></motion.div>
 
-                   {/* Rising Particles */}
-                  {[...Array(5)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      animate={{ translateZ: [0, 200], opacity: [0, 1, 0] }}
-                      transition={{ 
-                        duration: 2, 
-                        repeat: Infinity, 
-                        delay: i * 0.8,
-                        ease: "linear"
-                      }}
-                      className="absolute left-1/2 top-1/2 w-2 h-2 bg-electric-cyan rounded-full shadow-[0_0_10px_cyan]"
-                    />
-                  ))}
-
-                </div>
-
-                {/* Floating Data Points */}
-                {dataPoints.map((point, i) => (
+                {/* Rising Particles */}
+                {[...Array(5)].map((_, i) => (
                   <motion.div
                     key={i}
-                    animate={{
-                      y: [0, -40, 0],
-                      x: [0, (i % 2 === 0 ? 30 : -30), 0],
-                      opacity: [0.3, 0.7, 0.3]
-                    }}
+                    animate={{ translateZ: [0, 200], opacity: [0, 1, 0] }}
                     transition={{
-                      duration: 3 + i,
+                      duration: 2,
                       repeat: Infinity,
-                      delay: i * 0.5
+                      delay: i * 0.8,
+                      ease: "linear"
                     }}
-                    className="absolute w-1 h-1 bg-white rounded-full"
-                    style={{
-                      top: point.top,
-                      left: point.left,
-                    }}
+                    className="absolute left-1/2 top-1/2 w-2 h-2 bg-electric-cyan rounded-full shadow-[0_0_10px_cyan]"
                   />
                 ))}
-             </div>
+
+              </div>
+
+              {/* Floating Data Points */}
+              {dataPoints.map((point, i) => (
+                <motion.div
+                  key={i}
+                  animate={{
+                    y: [0, -40, 0],
+                    x: [0, (i % 2 === 0 ? 30 : -30), 0],
+                    opacity: [0.3, 0.7, 0.3]
+                  }}
+                  transition={{
+                    duration: 3 + i,
+                    repeat: Infinity,
+                    delay: i * 0.5
+                  }}
+                  className="absolute w-1 h-1 bg-white rounded-full"
+                  style={{
+                    top: point.top,
+                    left: point.left,
+                  }}
+                />
+              ))}
+            </div>
           </motion.div>
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
@@ -243,16 +245,16 @@ class Core extends AI {
       <section id="mission" className="py-24 relative bg-[#0B1221]">
         {/* Grid Pattern */}
         <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-               <span className="text-white">{t.aboutUs.missionTitle}</span>
-             </h2>
-             <div className="w-24 h-1 bg-electric-cyan mx-auto rounded-full mb-8"></div>
-             <p className="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed font-light">
-               "{t.aboutUs.missionDescription}"
-             </p>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <span className="text-white">{t.aboutUs.missionTitle}</span>
+            </h2>
+            <div className="w-24 h-1 bg-electric-cyan mx-auto rounded-full mb-8"></div>
+            <p className="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed font-light">
+              &quot;{t.aboutUs.missionDescription}&quot;
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
@@ -283,9 +285,9 @@ class Core extends AI {
       <section className="py-24 bg-[#020617] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            
+
             <div>
-              <motion.h2 
+              <motion.h2
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -293,7 +295,7 @@ class Core extends AI {
               >
                 {t.aboutUs.highlight}
               </motion.h2>
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -316,40 +318,40 @@ class Core extends AI {
             </div>
 
             <div className="relative lg:h-[600px] w-full flex items-center justify-center">
-               {/* Abstract decorative graphic */}
-               <div className="absolute inset-0 bg-gradient-to-r from-electric-cyan/5 to-purple-500/5 rounded-full blur-3xl"></div>
-               <div className="relative w-full h-full border border-white/5 bg-white/[0.02] backdrop-blur-sm rounded-2xl p-8 overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-electric-cyan to-transparent opacity-50"></div>
-                  
-                  {/* Mock Code Interface */}
-                  <div className="font-mono text-sm text-slate-500 space-y-4">
-                    <div className="flex gap-4 border-b border-white/10 pb-4 mb-6">
-                      <span className="text-white">nexus_core.tsx</span>
-                      <span>system_config.json</span>
-                      <span>deploy.yaml</span>
-                    </div>
-                    
-                    <div className="space-y-2">
-                        <p><span className="text-purple-400">import</span> <span className="text-yellow-300">{`{ Scalability, Security }`}</span> <span className="text-purple-400">from</span> <span className="text-green-400">'@nexura/core'</span>;</p>
-                        <p>&nbsp;</p>
-                        <p><span className="text-purple-400">export const</span> <span className="text-blue-400">BusinessTransformation</span> = <span className="text-yellow-300">async</span> (client) <span className="text-purple-400">=&gt;</span> &#123;</p>
-                        <p className="pl-4"><span className="text-slate-600">// Initializing system analysis</span></p>
-                        <p className="pl-4"><span className="text-purple-400">const</span> analysis = <span className="text-yellow-300">await</span> client.analyze();</p>
-                        <p className="pl-4"><span className="text-purple-400">if</span> (analysis.potential === <span className="text-green-400">'HIGH'</span>) &#123;</p>
-                        <p className="pl-8"><span className="text-purple-400">return</span> <span className="text-blue-400">Scalability</span>.boost(client, <span className="text-orange-400">100</span>);</p>
-                        <p className="pl-4">&#125;</p>
-                        <p className="pl-4"><span className="text-slate-600">// Implementing secure infrastructure</span></p>
-                        <p className="pl-4"><span className="text-blue-400">Security</span>.fortify(client.infrastructure);</p>
-                        <p className="pl-4"><span className="text-purple-400">return</span> <span className="text-green-400">"SUCCESS"</span>;</p>
-                        <p>&#125;;</p>
-                    </div>
+              {/* Abstract decorative graphic */}
+              <div className="absolute inset-0 bg-gradient-to-r from-electric-cyan/5 to-purple-500/5 rounded-full blur-3xl"></div>
+              <div className="relative w-full h-full border border-white/5 bg-white/[0.02] backdrop-blur-sm rounded-2xl p-8 overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-electric-cyan to-transparent opacity-50"></div>
 
-                    <div className="mt-12 p-4 bg-black/40 rounded border-l-2 border-green-500">
-                        <p className="text-green-400 font-bold">✓ BUILD SUCCESSFUL</p>
-                        <p className="text-xs mt-1">Time: 1.24s | Optimized by Nexura Engine</p>
-                    </div>
+                {/* Mock Code Interface */}
+                <div className="font-mono text-sm text-slate-500 space-y-4">
+                  <div className="flex gap-4 border-b border-white/10 pb-4 mb-6">
+                    <span className="text-white">nexus_core.tsx</span>
+                    <span>system_config.json</span>
+                    <span>deploy.yaml</span>
                   </div>
-               </div>
+
+                  <div className="space-y-2">
+                    <p><span className="text-purple-400">import</span> <span className="text-yellow-300">{`{ Scalability, Security }`}</span> <span className="text-purple-400">from</span> <span className="text-green-400">'@nexura/core'</span>;</p>
+                    <p>&nbsp;</p>
+                    <p><span className="text-purple-400">export const</span> <span className="text-blue-400">BusinessTransformation</span> = <span className="text-yellow-300">async</span> (client) <span className="text-purple-400">=&gt;</span> &#123;</p>
+                    <p className="pl-4"><span className="text-slate-600">{"// Initializing system analysis"}</span></p>
+                    <p className="pl-4"><span className="text-purple-400">const</span> analysis = <span className="text-yellow-300">await</span> client.analyze();</p>
+                    <p className="pl-4"><span className="text-purple-400">if</span> (analysis.potential === <span className="text-green-400">'HIGH'</span>) &#123;</p>
+                    <p className="pl-8"><span className="text-purple-400">return</span> <span className="text-blue-400">Scalability</span>.boost(client, <span className="text-orange-400">100</span>);</p>
+                    <p className="pl-4">&#125;</p>
+                    <p className="pl-4"><span className="text-slate-600">{"// Implementing secure infrastructure"}</span></p>
+                    <p className="pl-4"><span className="text-blue-400">Security</span>.fortify(client.infrastructure);</p>
+                    <p className="pl-4"><span className="text-purple-400">return</span> <span className="text-green-400">&quot;SUCCESS&quot;</span>;</p>
+                    <p>&#125;;</p>
+                  </div>
+
+                  <div className="mt-12 p-4 bg-black/40 rounded border-l-2 border-green-500">
+                    <p className="text-green-400 font-bold">✓ BUILD SUCCESSFUL</p>
+                    <p className="text-xs mt-1">Time: 1.24s | Optimized by Nexura Engine</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -359,16 +361,16 @@ class Core extends AI {
       {/* --- SERVICES TEASER --- */}
       <section className="py-20 bg-[#0B1221] border-y border-white/5">
         <div className="max-w-4xl mx-auto px-4 text-center">
-           <h3 className="text-3xl font-bold text-white mb-6">
+          <h3 className="text-3xl font-bold text-white mb-6">
             {t.aboutUs.coreServicesTitle}
-           </h3>
-           <p className="text-slate-400 text-lg mb-10 leading-relaxed">
+          </h3>
+          <p className="text-slate-400 text-lg mb-10 leading-relaxed">
             {t.aboutUs.servicesOverview}
-           </p>
-           <Link href="/services" className="inline-block relative px-8 py-3 overflow-hidden rounded-full group bg-transparent border border-electric-cyan text-electric-cyan font-semibold hover:text-[#020617] transition-colors duration-300">
-             <span className="absolute inset-0 w-full h-full bg-electric-cyan scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-             <span className="relative z-10">{t.aboutUs.exploreTech}</span>
-           </Link>
+          </p>
+          <Link href="/services" className="inline-block relative px-8 py-3 overflow-hidden rounded-full group bg-transparent border border-electric-cyan text-electric-cyan font-semibold hover:text-[#020617] transition-colors duration-300">
+            <span className="absolute inset-0 w-full h-full bg-electric-cyan scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            <span className="relative z-10">{t.aboutUs.exploreTech}</span>
+          </Link>
         </div>
       </section>
 
@@ -376,24 +378,24 @@ class Core extends AI {
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#020617] to-[#0B1221]"></div>
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">
-                {t.aboutUs.ctaTitle}
-            </h2>
-            <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
-                {t.aboutUs.ctaDescription}
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-                 <Link
-                    href="/contact"
-                    className="relative px-14 py-6 bg-electric-cyan text-midnight-navy text-xl font-bold rounded-sm overflow-hidden group hover:shadow-[0_0_60px_rgba(0,215,215,0.5)] transition-all duration-300"
-                >
-                    <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 skew-y-12"></span>
-                    <span className="relative z-10 flex items-center gap-3">
-                        {t.aboutUs.ctaButton}
-                        <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                </Link>
-            </div>
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">
+            {t.aboutUs.ctaTitle}
+          </h2>
+          <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
+            {t.aboutUs.ctaDescription}
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+            <Link
+              href="/contact"
+              className="relative px-14 py-6 bg-electric-cyan text-midnight-navy text-xl font-bold rounded-sm overflow-hidden group hover:shadow-[0_0_60px_rgba(0,215,215,0.5)] transition-all duration-300"
+            >
+              <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 skew-y-12"></span>
+              <span className="relative z-10 flex items-center gap-3">
+                {t.aboutUs.ctaButton}
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 

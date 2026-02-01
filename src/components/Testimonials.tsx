@@ -18,15 +18,15 @@ export default function Testimonials() {
     <section className="py-24 bg-midnight-navy relative overflow-hidden">
       {/* Background Map / Network Pattern */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
-         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-electric-cyan/10 via-midnight-navy to-midnight-navy"></div>
-         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <circle cx="2" cy="2" r="1" className="text-slate-700" fill="currentColor" />
-                </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#dots)" />
-         </svg>
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-electric-cyan/10 via-midnight-navy to-midnight-navy"></div>
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1" className="text-slate-700" fill="currentColor" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#dots)" />
+        </svg>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -69,7 +69,7 @@ export default function Testimonials() {
               </div>
 
               <p className="text-slate-300 mb-8 leading-relaxed text-sm md:text-base">
-                "{item.quote}"
+                &quot;{item.quote}&quot;
               </p>
 
               <div className="flex items-center gap-4">
