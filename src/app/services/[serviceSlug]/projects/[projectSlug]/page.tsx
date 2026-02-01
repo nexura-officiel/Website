@@ -12,6 +12,26 @@ import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
 import { Project } from "@/types";
 
+// Interface for the raw database response
+interface DBProject {
+  id: string;
+  slug: string;
+  name_en: string;
+  name_fr: string;
+  description_en: string;
+  description_fr: string;
+  long_description_en: string;
+  long_description_fr: string;
+  image: string;
+  images: string[];
+  video?: string;
+  demo_link?: string;
+  github_link?: string;
+  tags: string[];
+  service_id: string;
+  created_at: string;
+}
+
 export default function ProjectDetailPage() {
   const { t, language } = useLanguage();
   const params = useParams();
@@ -43,38 +63,42 @@ export default function ProjectDetailPage() {
         if (!serviceData) throw new Error("Service not found");
 
         // 2. Fetch all projects for this service to calculate Next/Prev
-        // Note: For large datasets, this should be optimized.
-        const { data: allProjectsData } = await supabase
+        const { data: rawData } = await supabase
           .from('projects')
           .select('*')
           .eq('service_id', serviceData.id)
-          .order('created_at', { ascending: true }); // Assuming there's a created_at or some order
+          .order('created_at', { ascending: true });
 
-        if (!allProjectsData) throw new Error("No projects found");
+        if (!rawData) throw new Error("No projects found");
 
-        const currentIndex = allProjectsData.findIndex((p: any) => p.slug === projectSlug);
+        // Cast raw data to defined interface
+        const allProjectsData = rawData as DBProject[];
+
+        const currentIndex = allProjectsData.findIndex((p) => p.slug === projectSlug);
 
         if (currentIndex === -1) {
           setProject(null);
           return;
         }
 
-        const currentProjectData = allProjectsData[currentIndex];
+        // Helper to map DB project to UI Project
+        const mapProject = (p: DBProject): Project => ({
+          id: p.id,
+          slug: p.slug,
+          name: language === 'fr' ? p.name_fr : p.name_en,
+          description: language === 'fr' ? p.description_fr : p.description_en,
+          longDescription: language === 'fr' ? p.long_description_fr : p.long_description_en,
+          image: p.image,
+          images: p.images || [],
+          video: p.video,
+          demoLink: p.demo_link,
+          githubLink: p.github_link,
+          tags: p.tags || []
+        });
 
-        // Map current project
-        const mappedProject: Project = {
-          id: currentProjectData.id,
-          slug: currentProjectData.slug,
-          name: language === 'fr' ? currentProjectData.name_fr : currentProjectData.name_en,
-          description: language === 'fr' ? currentProjectData.description_fr : currentProjectData.description_en,
-          longDescription: language === 'fr' ? currentProjectData.long_description_fr : currentProjectData.long_description_en,
-          image: currentProjectData.image,
-          images: currentProjectData.images || [],
-          video: currentProjectData.video,
-          demoLink: currentProjectData.demo_link,
-          githubLink: currentProjectData.github_link,
-          tags: currentProjectData.tags || []
-        };
+        // Current Project
+        const currentProjectData = allProjectsData[currentIndex];
+        const mappedProject = mapProject(currentProjectData);
 
         setProject(mappedProject);
         if (mappedProject.images && mappedProject.images.length > 0) {
@@ -85,23 +109,13 @@ export default function ProjectDetailPage() {
 
         // Set Prev/Next
         if (currentIndex > 0) {
-          const p = allProjectsData[currentIndex - 1];
-          setPrevProject({
-            ...p,
-            name: language === 'fr' ? p.name_fr : p.name_en,
-            slug: p.slug
-          } as any);
+          setPrevProject(mapProject(allProjectsData[currentIndex - 1]));
         } else {
           setPrevProject(null);
         }
 
         if (currentIndex < allProjectsData.length - 1) {
-          const n = allProjectsData[currentIndex + 1];
-          setNextProject({
-            ...n,
-            name: language === 'fr' ? n.name_fr : n.name_en,
-            slug: n.slug
-          } as any);
+          setNextProject(mapProject(allProjectsData[currentIndex + 1]));
         } else {
           setNextProject(null);
         }
