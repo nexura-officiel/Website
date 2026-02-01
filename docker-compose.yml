@@ -2,24 +2,39 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: apps/web/Dockerfile
       target: development
     ports:
       - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
-      - /app/.next
+      - /app/apps/web/.next
     environment:
       - NODE_ENV=development
-      # Pass-through variables from Netlify CLI
       - SUPABASE_ANON_KEY
       - SUPABASE_DATABASE_URL
-      - SUPABASE_JWT_SECRET
-      - SUPABASE_SERVICE_ROLE_KEY
-      # Map standard Next.js names if your code uses them
-      # - NEXT_PUBLIC_SUPABASE_URL=${SUPABASE_DATABASE_URL}
-      # - NEXT_PUBLIC_SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
-    # This allows you to see the logs clearly
+      - NEXT_PUBLIC_SUPABASE_URL
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY
+    stdin_open: true
+    tty: true
+
+  admin:
+    build:
+      context: .
+      dockerfile: apps/admin/Dockerfile
+      target: development
+    ports:
+      - "3001:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/admin/.next
+    environment:
+      - NODE_ENV=development
+      - SUPABASE_ANON_KEY
+      - SUPABASE_DATABASE_URL
+      - NEXT_PUBLIC_SUPABASE_URL
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY
     stdin_open: true
     tty: true

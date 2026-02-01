@@ -1,0 +1,6 @@
+[dev]
+  command = "cd ../.. && docker-compose up"
+  targetPort = 3000
+  port = 8888
+  framework = "#custom"
+  autoLaunch = false
