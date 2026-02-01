@@ -36,7 +36,7 @@ export default function Navbar() {
     <div className="relative flex items-center bg-midnight-navy border border-white/20 rounded-lg p-1 gap-1 h-9 shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden group">
       {/* Background Glitch/Scanline Effect */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10 pointer-events-none"></div>
-      
+
       {/* Sliding Highlight */}
       <motion.div
         className="absolute h-[calc(100%-8px)] top-1 bg-electric-cyan rounded md:rounded-md shadow-[0_0_15px_rgba(0,215,215,0.6)] z-0"
@@ -44,7 +44,7 @@ export default function Navbar() {
         animate={{
           left: language === "fr" ? "4px" : "50%",
           width: "calc(50% - 6px)",
-          x: language === "en" ? "2px" : "0px" 
+          x: language === "en" ? "2px" : "0px"
         }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
       />
@@ -52,11 +52,10 @@ export default function Navbar() {
       {/* FR Button */}
       <button
         onClick={() => setLanguage("fr", serviceSlug, projectSlug)}
-        className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
-          language === "fr" 
-            ? "text-midnight-navy" 
+        className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${language === "fr"
+            ? "text-midnight-navy"
             : "text-slate-500 hover:text-white"
-        }`}
+          }`}
       >
         FR
       </button>
@@ -67,11 +66,10 @@ export default function Navbar() {
       {/* EN Button */}
       <button
         onClick={() => setLanguage("en", serviceSlug, projectSlug)}
-        className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${
-          language === "en" 
-            ? "text-midnight-navy" 
+        className={`relative z-10 flex-1 px-3 py-1 text-[11px] font-mono font-bold transition-colors duration-300 rounded ${language === "en"
+            ? "text-midnight-navy"
             : "text-slate-500 hover:text-white"
-        }`}
+          }`}
       >
         EN
       </button>
@@ -79,12 +77,11 @@ export default function Navbar() {
   );
 
   return (
-    <nav 
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled 
-          ? "bg-midnight-navy/90 backdrop-blur-md border-b border-white/10 shadow-lg" 
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
+          ? "bg-midnight-navy/90 backdrop-blur-md border-b border-white/10 shadow-lg"
           : "bg-transparent border-transparent"
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -93,11 +90,11 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-2 group">
               <div className="relative">
                 <div className="absolute inset-0 bg-electric-cyan/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <Image 
-                  src="/logo-transparent.png" 
-                  alt="Nexura Logo" 
-                  width={32} 
-                  height={32} 
+                <Image
+                  src="/logo.png"
+                  alt="Nexura Logo"
+                  width={32}
+                  height={32}
                   className="w-auto h-8 relative z-10"
                 />
               </div>
@@ -138,8 +135,8 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-4">
-             {/* Mobile Language Switcher */}
-             <LanguageToggle />
+            {/* Mobile Language Switcher */}
+            <LanguageToggle />
 
             <button
               onClick={() => setIsOpen(!isOpen)}

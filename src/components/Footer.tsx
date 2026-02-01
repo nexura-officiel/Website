@@ -20,14 +20,14 @@ export default function Footer() {
     <footer className="bg-midnight-navy border-t border-white/10 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
-          
+
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <Image 
-                src="/logo-transparent.png" 
-                alt="Nexura Logo" 
-                width={28} 
-                height={28} 
+              <Image
+                src="/logo.png"
+                alt="Nexura Logo"
+                width={28}
+                height={28}
                 className="w-auto h-7"
               />
               <span className="font-sans font-bold text-xl tracking-wider text-white">
@@ -51,8 +51,8 @@ export default function Footer() {
                 <Instagram size={24} />
               </a>
               <div className="relative">
-                <button 
-                  onClick={handleCopyEmail} 
+                <button
+                  onClick={handleCopyEmail}
                   className="text-slate-400 hover:text-electric-cyan transition-colors relative"
                   title="Copy email to clipboard"
                 >
@@ -67,7 +67,7 @@ export default function Footer() {
             </div>
           </div>
 
-    
+
 
           <div>
             <h4 className="text-white font-bold mb-6">{t.footer.headers.sitemap}</h4>
