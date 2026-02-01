@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import { usePathname } from "next/navigation";
 
 const LanguageToggle = () => {
   const { language, setLanguage } = useLanguage();
@@ -59,7 +60,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { t } = useLanguage();
-
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,10 +72,10 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: t.nav.services, href: "#services" },
-    { name: t.nav.aboutUs, href: "#aboutUs" },
-    { name: t.nav.process, href: "#process" },
-    { name: t.nav.contact, href: "#contact" },
+    { name: t.nav.services, href: isHomePage ? "#services" : "/#services" },
+    { name: t.nav.aboutUs, href: isHomePage ? "#aboutUs" : "/#aboutUs" },
+    { name: t.nav.process, href: isHomePage ? "#process" : "/#process" },
+    { name: t.nav.contact, href: isHomePage ? "#contact" : "/#contact" },
   ];
 
   return (
@@ -125,7 +127,7 @@ export default function Navbar() {
             <LanguageToggle />
 
             <Link
-              href="#contact"
+              href={isHomePage ? "#contact" : "/#contact"}
               className="relative px-6 py-2 bg-transparent border border-electric-cyan text-electric-cyan font-sans font-semibold rounded-sm overflow-hidden group"
             >
               <div className="absolute inset-0 w-0 bg-electric-cyan transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
