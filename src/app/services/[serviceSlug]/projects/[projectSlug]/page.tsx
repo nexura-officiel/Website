@@ -67,7 +67,7 @@ export default function ProjectDetailPage() {
           .from('projects')
           .select('*')
           .eq('service_id', serviceData.id)
-          .order('created_at', { ascending: true });
+          .order('sort_order', { ascending: true });
 
         if (!rawData) throw new Error("No projects found");
 

@@ -28,7 +28,7 @@ export default function Services() {
         const { data, error } = await supabase
           .from('services')
           .select('*')
-          .order('id', { ascending: true })
+          .order('sort_order', { ascending: true })
           .limit(3); // Only show top 3 on home page
 
         if (error) {

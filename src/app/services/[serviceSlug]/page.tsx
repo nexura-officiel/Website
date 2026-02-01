@@ -57,7 +57,8 @@ export default function ServiceDetailPage() {
         const { data: projectData } = await supabase
           .from('projects')
           .select('*')
-          .eq('service_id', serviceData.id);
+          .eq('service_id', serviceData.id)
+          .order('sort_order', { ascending: true });
 
         if (projectData) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
