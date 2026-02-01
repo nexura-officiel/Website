@@ -10,12 +10,89 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import ParticleBackground from "@/components/ui/ParticleBackground";
 
-export default function ServiceDetailPage() {
-  const { t } = useLanguage();
-  const params = useParams();
-  const { serviceSlug } = params; // Changed from slug to serviceSlug
+import { supabase } from "@/lib/supabaseClient";
+import { useEffect, useState } from "react";
+import { Service, Project } from "@/types";
 
-  const service = t.services.items.find((item) => item.slug === serviceSlug); // Changed from slug to serviceSlug
+export default function ServiceDetailPage() {
+  const { t, language } = useLanguage();
+  const params = useParams();
+  const { serviceSlug } = params;
+
+  const [service, setService] = useState<Service | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!serviceSlug) return;
+
+      try {
+        setLoading(true);
+        // 1. Fetch Service
+        const { data: serviceData, error: serviceError } = await supabase
+          .from('services')
+          .select('*')
+          .eq('slug', serviceSlug)
+          .single();
+
+        if (serviceError || !serviceData) {
+          console.error("Service not found", serviceError);
+          setService(null);
+          return;
+        }
+
+        const mappedService: Service = {
+          id: serviceData.id,
+          slug: serviceData.slug,
+          title: language === 'fr' ? serviceData.title_fr : serviceData.title_en,
+          description: language === 'fr' ? serviceData.description_fr : serviceData.description_en,
+          tags: serviceData.tags || [],
+          system_load: serviceData.system_load || 85,
+          icon_name: serviceData.icon_name,
+          projects: []
+        };
+
+        // 2. Fetch Projects for this service
+        const { data: projectData, error: projectError } = await supabase
+          .from('projects')
+          .select('*')
+          .eq('service_id', serviceData.id);
+
+        if (projectData) {
+          mappedService.projects = projectData.map((p: any) => ({
+            id: p.slug, // Use slug as ID for routing consistency
+            slug: p.slug,
+            name: language === 'fr' ? p.name_fr : p.name_en,
+            description: language === 'fr' ? p.description_fr : p.description_en,
+            longDescription: language === 'fr' ? p.long_description_fr : p.long_description_en,
+            image: p.image,
+            images: p.images || [],
+            video: p.video,
+            demoLink: p.demo_link,
+            githubLink: p.github_link,
+            tags: p.tags || []
+          }));
+        }
+
+        setService(mappedService);
+
+      } catch (err) {
+        console.error("Error fetching details:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [serviceSlug, language]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-[#020617] text-white flex items-center justify-center">
+        <div className="font-mono text-electric-cyan animate-pulse">LOADING_DATA...</div>
+      </main>
+    );
+  }
 
   if (!service) {
     return (
@@ -24,7 +101,7 @@ export default function ServiceDetailPage() {
         <div className="flex flex-col items-center justify-center h-screen text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.serviceDetailPage.serviceNotFound}</h1>
           <p className="text-slate-400 mb-8">{t.serviceDetailPage.serviceNotFoundMessage}</p>
-        
+
         </div>
         <Footer />
       </main>
@@ -34,9 +111,9 @@ export default function ServiceDetailPage() {
   return (
     <main className="min-h-screen bg-[#020617] text-white selection:bg-electric-cyan selection:text-[#020617] overflow-x-hidden">
       <Navbar />
-      
+
       {/* --- HERO SECTION --- */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -55,7 +132,7 @@ export default function ServiceDetailPage() {
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
               {t.serviceDetailPage.backToServices}
             </Link>
-            
+
             <h1 className="text-5xl md:text-7xl font-bold font-sans text-white mb-6 tracking-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan to-purple-500">
                 {service.title}
@@ -74,7 +151,7 @@ export default function ServiceDetailPage() {
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.02] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
@@ -82,8 +159,8 @@ export default function ServiceDetailPage() {
             className="text-center mb-20"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric-cyan/5 border border-electric-cyan/20 text-electric-cyan text-sm font-mono mb-6 backdrop-blur-md">
-               <Briefcase size={14} />
-               {t.serviceDetailPage.ourPortfolio}
+              <Briefcase size={14} />
+              {t.serviceDetailPage.ourPortfolio}
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-white">
               {t.serviceDetailPage.relatedProjects}
@@ -91,8 +168,8 @@ export default function ServiceDetailPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-            {service.projects.map((project, index) => (
-              <Link key={project.id} href={`/services/${service.slug}/projects/${project.id}`}>
+            {service.projects?.map((project, index) => (
+              <Link key={project.id} href={`/services/${service.slug}/projects/${project.slug}`}>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -119,7 +196,7 @@ export default function ServiceDetailPage() {
                         {project.description}
                       </p>
                       <div className="flex flex-wrap items-center gap-3">
-                        
+
                         {project.tags.map((tag) => (
                           <span key={tag} className="text-sm font-mono px-3 py-1 bg-white/5 text-slate-300 rounded-full border border-white/10 group-hover:border-electric-cyan/20 transition-colors">
                             {tag}
@@ -128,8 +205,8 @@ export default function ServiceDetailPage() {
                       </div>
                     </div>
                     <div className="absolute top-4 right-4 px-3 py-1 text-xs font-mono text-electric-cyan border border-electric-cyan/20 rounded-full bg-electric-cyan/5 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        {t.serviceDetailPage.caseStudy}
-                      </div>
+                      {t.serviceDetailPage.caseStudy}
+                    </div>
                   </div>
                 </motion.div>
               </Link>

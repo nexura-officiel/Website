@@ -8,26 +8,85 @@ import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import { useEffect, useState } from "react";
+import { Project } from "@/types";
 
 export default function ProjectDetailPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const params = useParams();
   const { serviceSlug, projectSlug } = params;
 
-  const service = t.services.items.find((item) => item.slug === serviceSlug);
-  const project = service?.projects.find((proj) => proj.id === projectSlug);
+  const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [mainImage, setMainImage] = useState<string | null>(null);
 
-  const [mainImage, setMainImage] = useState(project?.images ? project.images[0] : project?.image);
+  useEffect(() => {
+    const fetchProject = async () => {
+      if (!projectSlug) return;
 
-  if (!service || !project) {
+      try {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .eq('slug', projectSlug)
+          .single();
+
+        if (error || !data) {
+          console.error("Project not found", error);
+          setProject(null);
+          return;
+        }
+
+        const mappedProject: Project = {
+          id: data.id,
+          slug: data.slug,
+          name: language === 'fr' ? data.name_fr : data.name_en,
+          description: language === 'fr' ? data.description_fr : data.description_en,
+          longDescription: language === 'fr' ? data.long_description_fr : data.long_description_en,
+          image: data.image,
+          images: data.images || [],
+          video: data.video,
+          demoLink: data.demo_link,
+          githubLink: data.github_link,
+          tags: data.tags || []
+        };
+
+        setProject(mappedProject);
+        // Set initial main image
+        if (mappedProject.images && mappedProject.images.length > 0) {
+          setMainImage(mappedProject.images[0]);
+        } else {
+          setMainImage(mappedProject.image);
+        }
+
+      } catch (err) {
+        console.error("Error fetching project:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProject();
+  }, [projectSlug, language]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-[#020617] text-white flex items-center justify-center">
+        <div className="font-mono text-electric-cyan animate-pulse">LOADING_DATA...</div>
+      </main>
+    );
+  }
+
+  if (!project) {
     return (
       <main className="min-h-screen bg-[#020617] text-white">
         <Navbar />
         <div className="flex flex-col items-center justify-center h-screen text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.serviceDetailPage.serviceNotFound}</h1>
           <p className="text-slate-400 mb-8">{t.serviceDetailPage.serviceNotFoundMessage}</p>
-          
+
         </div>
         <Footer />
       </main>
@@ -37,10 +96,10 @@ export default function ProjectDetailPage() {
   return (
     <main className="min-h-screen bg-[#020617] text-white selection:bg-electric-cyan selection:text-[#020617] overflow-x-hidden">
       <Navbar />
-      
+
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <Link href={`/services/${service.slug}`} className="inline-flex items-center gap-2 text-slate-400 hover:text-electric-cyan transition-colors mb-8 group">
+          <Link href={`/services/${serviceSlug}`} className="inline-flex items-center gap-2 text-slate-400 hover:text-electric-cyan transition-colors mb-8 group">
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             {t.serviceDetailPage.backToServices}
           </Link>
@@ -139,7 +198,7 @@ export default function ProjectDetailPage() {
               </div>
             </motion.div>
           )}
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
