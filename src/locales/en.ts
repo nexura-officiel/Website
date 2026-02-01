@@ -1,6 +1,7 @@
 export const en = {
   nav: {
     services: "Services",
+    projects: "Projects",
     aboutUs: "About Us",
     process: "Process",
     contact: "Contact",
