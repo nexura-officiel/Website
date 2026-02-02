@@ -8,6 +8,7 @@ import { ArrowLeft, Save, X, HelpCircle, Laptop, Settings, ChevronRight, Info, E
 import * as LucideIcons from "lucide-react";
 import Link from "next/link";
 import { clsx } from "clsx";
+import { createServiceAction } from "@/app/actions/database";
 
 // Helper to check if a string is a valid Lucide icon name
 const isValidLucideIconName = (name: string): name is keyof typeof LucideIcons => {
@@ -69,17 +70,21 @@ export default function NewServicePage() {
         setLoading(true);
 
         try {
-            const { error } = await supabase
-                .from('services')
-                .insert([formData]);
+            console.log('Deploying new service to core...');
+            const result = await createServiceAction(formData);
 
-            if (error) throw error;
+            if (!result) {
+                throw new Error("Core reject: Service was not deployed.");
+            }
 
-            router.push('/services');
+            console.log('Service deployed successfully.');
             router.refresh();
-        } catch (error) {
-            console.error('Error creating service:', error);
-            alert('Failed to create service. Check console for details.');
+            setTimeout(() => {
+                router.push('/services');
+            }, 150);
+        } catch (error: any) {
+            console.error('Critical Error - Deployment Failed:', error);
+            alert(`LAUNCH FAILED: ${error.message || 'Unknown network error'}`);
         } finally {
             setLoading(false);
         }

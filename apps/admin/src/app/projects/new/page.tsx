@@ -9,6 +9,7 @@ import Link from "next/link";
 import ImageUpload from "@/components/ImageUpload";
 import { clsx } from "clsx";
 import Image from "next/image";
+import { createProjectAction } from "@/app/actions/database";
 
 type Language = 'en' | 'fr';
 
@@ -75,17 +76,21 @@ export default function NewProjectPage() {
         setLoading(true);
 
         try {
-            const { error } = await supabase
-                .from('projects')
-                .insert([formData]);
+            console.log('Initiating project registration...');
+            const result = await createProjectAction(formData);
 
-            if (error) throw error;
+            if (!result) {
+                throw new Error("Registry reject: Project was not archived.");
+            }
 
-            router.push('/projects');
+            console.log('Project archived successfully.');
             router.refresh();
-        } catch (error) {
-            console.error('Error creating project:', error);
-            alert('Failed to create project. Check console for details.');
+            setTimeout(() => {
+                router.push('/projects');
+            }, 150);
+        } catch (error: any) {
+            console.error('Critical Error - Archive Failed:', error);
+            alert(`REGISTRATION FAILED: ${error.message || 'Unknown protocol error'}`);
         } finally {
             setLoading(false);
         }

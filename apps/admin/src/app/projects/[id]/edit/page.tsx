@@ -9,6 +9,7 @@ import Link from "next/link";
 import ImageUpload from "@/components/ImageUpload";
 import { clsx } from "clsx";
 import Image from "next/image";
+import { updateProjectAction } from "@/app/actions/database";
 
 type Language = 'en' | 'fr';
 
@@ -96,18 +97,25 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
         setLoading(true);
 
         try {
-            const { error } = await supabase
-                .from('projects')
-                .update(formData)
-                .eq('id', id);
+            console.log('Initiating project update via Server Action...');
 
-            if (error) throw error;
+            // Use server action to bypass potential client-side RLS issues
+            const result = await updateProjectAction(id, formData);
 
-            router.push('/projects');
+            if (!result) {
+                throw new Error("Target registry entry not found or update rejected by core.");
+            }
+
+            console.log('Update successful, refreshing registry cache...');
+
             router.refresh();
-        } catch (error) {
-            console.error('Error updating project:', error);
-            alert('Failed to update project.');
+            setTimeout(() => {
+                router.push('/projects');
+            }, 150);
+
+        } catch (error: any) {
+            console.error('Critical Error - Registry Sync Failed:', error);
+            alert(`UPDATE FAILED: ${error.message || 'Unknown protocol error'}`);
         } finally {
             setLoading(false);
         }

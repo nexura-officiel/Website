@@ -8,6 +8,7 @@ import { ArrowLeft, Save, X, HelpCircle, Laptop, Settings, ChevronRight, Info, E
 import * as LucideIcons from "lucide-react";
 import Link from "next/link";
 import { clsx } from "clsx";
+import { updateServiceAction } from "@/app/actions/database";
 
 // Helper to check if a string is a valid Lucide icon name
 const isValidLucideIconName = (name: string): name is keyof typeof LucideIcons => {
@@ -98,18 +99,21 @@ export default function EditServicePage({ params }: EditServicePageProps) {
         setLoading(true);
 
         try {
-            const { error } = await supabase
-                .from('services')
-                .update(formData)
-                .eq('id', id);
+            console.log('Synchronizing service changes with core...');
+            const result = await updateServiceAction(id, formData);
 
-            if (error) throw error;
+            if (!result) {
+                throw new Error("Target service logs were not updated.");
+            }
 
-            router.push('/services');
+            console.log('Synchronization complete.');
             router.refresh();
-        } catch (error) {
-            console.error('Error updating service:', error);
-            alert('Failed to update service. Check console for details.');
+            setTimeout(() => {
+                router.push('/services');
+            }, 150);
+        } catch (error: any) {
+            console.error('Critical Error - Core Sync Failed:', error);
+            alert(`MODIFICATION FAILED: ${error.message || 'Unknown network error'}`);
         } finally {
             setLoading(false);
         }
