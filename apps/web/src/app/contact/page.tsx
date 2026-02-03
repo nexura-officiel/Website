@@ -27,11 +27,18 @@ export default function ContactPage() {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      type: formData.get('type'),
+      message: formData.get('message'),
+    };
+
     try {
-      const response = await fetch("/", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData as any).toString(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
@@ -39,8 +46,8 @@ export default function ContactPage() {
         setTimeout(() => setSubmitted(false), 5000);
         form.reset();
       } else {
-        console.error("Form submission failed");
-        // Optional: Add error handling UI here
+        const errorData = await response.json().catch(() => ({}));
+        console.error("Form submission failed:", response.status, errorData);
       }
     } catch (error) {
       console.error("Form submission error", error);
@@ -199,13 +206,9 @@ export default function ContactPage() {
                       </div>
                     ) : (
                       <form
-                        name="contact"
-                        method="POST"
-                        data-netlify="true"
                         onSubmit={handleSubmit}
                         className="space-y-6"
                       >
-                        <input type="hidden" name="form-name" value="contact" />
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="group">
                             <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === 'name' ? 'text-electric-cyan' : 'text-slate-500'}`}>
