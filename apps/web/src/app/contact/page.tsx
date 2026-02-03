@@ -22,10 +22,30 @@ export default function ContactPage() {
     setMounted(true);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 5000);
+        form.reset();
+      } else {
+        console.error("Form submission failed");
+        // Optional: Add error handling UI here
+      }
+    } catch (error) {
+      console.error("Form submission error", error);
+      // Optional: Add error handling UI here
+    }
   };
 
   const handleCopyEmail = () => {
@@ -178,7 +198,14 @@ export default function ContactPage() {
                         </button>
                       </div>
                     ) : (
-                      <form onSubmit={handleSubmit} className="space-y-6">
+                      <form
+                        name="contact"
+                        method="POST"
+                        data-netlify="true"
+                        onSubmit={handleSubmit}
+                        className="space-y-6"
+                      >
+                        <input type="hidden" name="form-name" value="contact" />
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="group">
                             <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === 'name' ? 'text-electric-cyan' : 'text-slate-500'}`}>
@@ -186,6 +213,7 @@ export default function ContactPage() {
                             </label>
                             <input
                               type="text"
+                              name="name"
                               required
                               onFocus={() => setFocusedField('name')}
                               onBlur={() => setFocusedField(null)}
@@ -199,6 +227,7 @@ export default function ContactPage() {
                             </label>
                             <input
                               type="email"
+                              name="email"
                               required
                               onFocus={() => setFocusedField('email')}
                               onBlur={() => setFocusedField(null)}
@@ -213,12 +242,13 @@ export default function ContactPage() {
                             {t.contact.form.typeLabel}
                           </label>
                           <select
+                            name="type"
                             onFocus={() => setFocusedField('type')}
                             onBlur={() => setFocusedField(null)}
                             className="w-full bg-[#020617] border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-electric-cyan/50 focus:ring-1 focus:ring-electric-cyan/50 transition-all [&>option]:bg-[#020617]"
                           >
                             {t.contact.form.types.map((type, i) => (
-                              <option key={i}>{type}</option>
+                              <option key={i} value={type}>{type}</option>
                             ))}
                           </select>
                         </div>
@@ -228,6 +258,7 @@ export default function ContactPage() {
                             {t.contact.form.msgLabel}
                           </label>
                           <textarea
+                            name="message"
                             rows={4}
                             required
                             onFocus={() => setFocusedField('message')}

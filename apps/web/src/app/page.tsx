@@ -19,10 +19,35 @@ export default function Home() {
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const { t } = useLanguage();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      type: formData.get('type'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 5000);
+        form.reset();
+      } else {
+        console.error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Form submission error", error);
+    }
   };
 
   return (
@@ -160,14 +185,18 @@ export default function Home() {
                       </button>
                     </div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form
+                      onSubmit={handleSubmit}
+                      className="space-y-6"
+                    >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="relative">
-                          <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === '"name"' ? '"text-electric-cyan"' : '"text-slate-500"'}`}>
+                          <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === 'name' ? 'text-electric-cyan' : 'text-slate-500'}`}>
                             {t.contact.form.nameLabel}
                           </label>
                           <input
                             type="text"
+                            name="name"
                             required
                             onFocus={() => setFocusedField('name')}
                             onBlur={() => setFocusedField(null)}
@@ -176,11 +205,12 @@ export default function Home() {
                           />
                         </div>
                         <div>
-                          <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === '"email"' ? '"text-electric-cyan"' : '"text-slate-500"'}`}>
+                          <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === 'email' ? 'text-electric-cyan' : 'text-slate-500'}`}>
                             {t.contact.form.emailLabel}
                           </label>
                           <input
                             type="email"
+                            name="email"
                             required
                             onFocus={() => setFocusedField('email')}
                             onBlur={() => setFocusedField(null)}
@@ -191,25 +221,27 @@ export default function Home() {
                       </div>
 
                       <div>
-                        <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === '"type"' ? '"text-electric-cyan"' : '"text-slate-500"'}`}>
+                        <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === 'type' ? 'text-electric-cyan' : 'text-slate-500'}`}>
                           {t.contact.form.typeLabel}
                         </label>
                         <select
+                          name="type"
                           onFocus={() => setFocusedField('type')}
                           onBlur={() => setFocusedField(null)}
                           className="w-full bg-[#050C16] border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-electric-cyan/50 focus:ring-1 focus:ring-electric-cyan/50 transition-all [&>option]:bg-midnight-navy"
                         >
                           {t.contact.form.types.map((type, i) => (
-                            <option key={i}>{type}</option>
+                            <option key={i} value={type}>{type}</option>
                           ))}
                         </select>
                       </div>
 
                       <div>
-                        <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === '"message"' ? '"text-electric-cyan"' : '"text-slate-500"'}`}>
+                        <label className={`block text-xs font-mono mb-2 transition-colors ${focusedField === 'message' ? 'text-electric-cyan' : 'text-slate-500'}`}>
                           {t.contact.form.msgLabel}
                         </label>
                         <textarea
+                          name="message"
                           rows={4}
                           required
                           onFocus={() => setFocusedField('message')}
