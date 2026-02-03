@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ContactCTA from "@/components/ContactCTA";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -447,6 +448,7 @@ export default function ProjectDetailPage() {
         )}
       </AnimatePresence>
 
+      <ContactCTA />
       <Footer />
     </main>
   );
