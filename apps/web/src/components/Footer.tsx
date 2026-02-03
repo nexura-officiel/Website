@@ -72,9 +72,9 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-6">{t.footer.headers.sitemap}</h4>
             <ul className="space-y-3 text-slate-400">
-              <li><Link href="/services" className="hover:text-electric-cyan transition-colors">{t.nav.services}</Link></li>
               <li><Link href="/about" className="hover:text-electric-cyan transition-colors">{t.nav.aboutUs}</Link></li>
-              <li><Link href="#process" className="hover:text-electric-cyan transition-colors">{t.nav.process}</Link></li>
+              <li><Link href="/services" className="hover:text-electric-cyan transition-colors">{t.nav.services}</Link></li>
+              <li><Link href="/projects" className="hover:text-electric-cyan transition-colors">{t.nav.projects}</Link></li>
               <li><Link href="/contact" className="hover:text-electric-cyan transition-colors">{t.nav.contact}</Link></li>
             </ul>
           </div>

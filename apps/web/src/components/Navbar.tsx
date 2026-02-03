@@ -72,9 +72,9 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: t.nav.services, href: isHomePage ? "#services" : "/#services" },
     { name: t.nav.aboutUs, href: isHomePage ? "#aboutUs" : "/#aboutUs" },
-    { name: t.nav.process, href: isHomePage ? "#process" : "/#process" },
+    { name: t.nav.services, href: isHomePage ? "#services" : "/#services" },
+    { name: t.nav.projects, href: "/projects" },
     { name: t.nav.contact, href: isHomePage ? "#contact" : "/#contact" },
   ];
 
