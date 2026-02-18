@@ -44,3 +44,41 @@ export async function uploadImageAction(formData: FormData) {
 
     return publicUrl;
 }
+
+export async function deleteImageAction(url: string, bucket: string) {
+    if (!supabaseAdmin) {
+        throw new Error("Supabase Admin client not initialized.");
+    }
+
+    try {
+        // Extract file path from URL
+        // URL format: .../storage/v1/object/public/[bucket]/[path]
+        // or just split by bucket name
+        const pathParts = url.split(`/${bucket}/`);
+        if (pathParts.length < 2) {
+            console.warn(`[Delete Image] Could not extract path from URL: ${url}`);
+            return; // Skip if format doesn't match, maybe it's not hosted here
+        }
+
+        const filePath = pathParts[1]; // content after bucket/
+        // Decode URI component in case of spaces etc
+        const decodedPath = decodeURIComponent(filePath);
+
+        console.log(`[Delete Image] Removing ${decodedPath} from bucket ${bucket}`);
+
+        const { error } = await supabaseAdmin.storage
+            .from(bucket)
+            .remove([decodedPath]);
+
+        if (error) {
+            console.error(`[Delete Image] Error removing file:`, error);
+            throw new Error(error.message);
+        }
+
+    } catch (error) {
+        console.error(`[Delete Image] Unexpected error:`, error);
+        // Don't throw for deletion errors to allow the main save to proceed, 
+        // but log it. Or should we throw? 
+        // Better to fail silently on cleanup than block the main update, usually.
+    }
+}

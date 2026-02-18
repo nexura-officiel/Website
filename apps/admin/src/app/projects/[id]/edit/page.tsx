@@ -1,15 +1,17 @@
 
+
 "use client";
 
 import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@nexura/database";
-import { ArrowLeft, Save, X, Eye, Github, Globe, Compass, ScrollText, Image as ImageIcon, Loader2, ChevronRight } from "lucide-react";
+import { ArrowLeft, Save, X, Eye, Github, Globe, Compass, ScrollText, Image as ImageIcon, Loader2, ChevronRight, Layers } from "lucide-react";
 import Link from "next/link";
 import ImageUpload from "@/components/ImageUpload";
 import { clsx } from "clsx";
 import Image from "next/image";
 import { updateProjectAction } from "@/app/actions/database";
+import { deleteImageAction } from "@/app/actions/upload";
 
 type Language = 'en' | 'fr';
 
@@ -30,12 +32,14 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
         long_description_en: "",
         long_description_fr: "",
         image: "",
+        images: [] as string[],
         demo_link: "",
         github_link: "",
         service_id: "",
         tags: [] as string[]
     });
 
+    const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
     const [currentTag, setCurrentTag] = useState("");
 
     useEffect(() => {
@@ -60,6 +64,7 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
                         long_description_en: projectRes.data.long_description_en || "",
                         long_description_fr: projectRes.data.long_description_fr || "",
                         image: projectRes.data.image || "",
+                        images: projectRes.data.images || [],
                         demo_link: projectRes.data.demo_link || "",
                         github_link: projectRes.data.github_link || "",
                         service_id: projectRes.data.service_id || "",
@@ -92,6 +97,20 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
         setFormData(prev => ({ ...prev, tags: prev.tags.filter(t => t !== tagToRemove) }));
     };
 
+    const handleAddGalleryImage = (url: string) => {
+        if (url) {
+            setFormData(prev => ({ ...prev, images: [...prev.images, url] }));
+        }
+    };
+
+    const removeGalleryImage = (indexToRemove: number) => {
+        const imageToRemove = formData.images[indexToRemove];
+        // Track for deletion on save
+        setImagesToDelete(prev => [...prev, imageToRemove]);
+        // Update UI immediately
+        setFormData(prev => ({ ...prev, images: prev.images.filter((_, i) => i !== indexToRemove) }));
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -99,6 +118,13 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
         try {
             console.log('Initiating project update via Server Action...');
 
+            // 1. Process deletions
+            if (imagesToDelete.length > 0) {
+                console.log(`Deleting ${imagesToDelete.length} removed images from storage...`);
+                await Promise.all(imagesToDelete.map(url => deleteImageAction(url, "projects")));
+            }
+
+            // 2. Update Database
             // Use server action to bypass potential client-side RLS issues
             const result = await updateProjectAction(id, formData);
 
@@ -293,6 +319,44 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
                                     />
                                 </label>
                             </div>
+                        </div>
+                    </div>
+
+                    {/* Visual Exploration Gallery */}
+                    <div className="bg-[#0F172A] border border-white/10 rounded-2xl p-8 shadow-xl">
+                        <div className="flex items-center gap-2 mb-8 text-pink-400">
+                            <Layers size={18} />
+                            <h2 className="text-sm font-bold uppercase tracking-[0.2em]">Visual Exploration Gallery</h2>
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                            {formData.images.map((img, idx) => (
+                                <div key={idx} className="relative aspect-video rounded-xl overflow-hidden group border border-white/10">
+                                    <Image
+                                        src={img}
+                                        alt={`Gallery ${idx}`}
+                                        fill
+                                        className="object-cover"
+                                        unoptimized
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => removeGalleryImage(idx)}
+                                        className="absolute top-2 right-2 p-1.5 bg-red-500/80 hover:bg-red-500 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all backdrop-blur-sm"
+                                    >
+                                        <X size={14} />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="p-6 bg-black/20 rounded-xl border border-dashed border-white/10">
+                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-4 ml-1">Add New Screenshot</span>
+                            <ImageUpload
+                                value=""
+                                onChange={handleAddGalleryImage}
+                                bucket="projects"
+                            />
                         </div>
                     </div>
 
